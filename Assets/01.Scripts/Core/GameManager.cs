@@ -4,9 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int ManualDamage; 
-    public int AutoDamage;
-    public int Gold;
+    public Value ManualDamage; 
+    public Value AutoDamage;
+    public Value Gold;
 
     private void Awake()
     {

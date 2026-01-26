@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class AutoClicker : MonoBehaviour
 {
+    private Value _damage;
     [SerializeField] private float _speed;
     private float _timer;
 
     [SerializeField] private SlimeSpawner _spawner;
     private List<IClickable> _clickables = new();
     
-    private void Awake()
+    private void Start()
     {
         _timer = 0;
         foreach (var slime in _spawner.Slimes)
@@ -17,6 +18,8 @@ public class AutoClicker : MonoBehaviour
             if (!slime.TryGetComponent(out IClickable clickable)) return;
             _clickables.Add(clickable);
         }
+
+        _damage = GameManager.Instance.AutoDamage;
     }
     
     private void Update()
@@ -26,7 +29,7 @@ public class AutoClicker : MonoBehaviour
         if (_timer < 1 / _speed) return;
         _timer = 0;
 
-        ClickInfo clickInfo = new(EClickType.Auto, GameManager.Instance.AutoDamage);
+        ClickInfo clickInfo = new(EClickType.Auto, _damage.Amount);
             
         foreach (var clickable in _clickables)
         {

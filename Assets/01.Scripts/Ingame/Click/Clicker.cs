@@ -4,10 +4,13 @@ public class Clicker : MonoBehaviour
 {
     [SerializeField] private LayerMask _clickLayer;
     Camera _mainCamera;
+
+    private Value _damage;
     
-    private void Awake()
+    private void Start()
     {
         _mainCamera = Camera.main;
+        _damage = GameManager.Instance.ManualDamage;
     }
     
     private void Update()
@@ -28,7 +31,7 @@ public class Clicker : MonoBehaviour
 
         if (!hit.collider.TryGetComponent(out IClickable clickTarget)) return;
 
-        ClickInfo clickInfo = new(EClickType.Manual, GameManager.Instance.ManualDamage, hit.point);
+        ClickInfo clickInfo = new(EClickType.Manual, _damage.Amount, hit.point);
         clickTarget.OnClick(clickInfo);
     }
 }
