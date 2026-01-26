@@ -1,30 +1,20 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ScaleTweeningFeedback : MonoBehaviour
+public class ScaleTweeningFeedback : MonoBehaviour, IFeedback
 {
-    [SerializeField] private ClickTarget _owner;
+    [SerializeField] private Transform _owner;
     [SerializeField] private float _endvalue;
     [SerializeField] private float _duration;
     
 #if UNITY_EDITOR
     private void Reset()
     {
-        _owner = GetComponent<ClickTarget>();
+        _owner = GetComponent<Transform>();
     }
 #endif
 
-    private void Awake()
-    {
-        _owner.OnClicked += PlayTween;
-    }
-
-    private void OnDestroy()
-    {
-        _owner.OnClicked -= PlayTween;
-    }
-
-    private void PlayTween()
+    public void Play()
     {
         _owner.transform.DOKill();
         _owner.transform.DOScale(_endvalue, _duration).OnComplete(() => 

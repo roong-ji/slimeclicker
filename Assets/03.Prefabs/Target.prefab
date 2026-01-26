@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf5549fb2a7b88469881f21ec5f225e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 8356351627494921499}
+  _owner: {fileID: 7212357659047090925}
   _endvalue: 1.2
   _duration: 0.6
 --- !u!114 &2655350139578569775
@@ -177,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5d7d4643975c748b483c2208d64055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 8356351627494921499}
   _spriteRenderer: {fileID: 3575304864695221963}
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _interval: 0.3
