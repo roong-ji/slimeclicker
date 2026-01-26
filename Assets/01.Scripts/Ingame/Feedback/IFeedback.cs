@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IFeedback
 {
-    void Play();
+    void Play(ClickInfo info);
 }

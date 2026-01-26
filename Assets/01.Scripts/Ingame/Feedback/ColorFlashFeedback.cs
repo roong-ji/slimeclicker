@@ -22,7 +22,7 @@ public class ColorFlashFeedback : MonoBehaviour, IFeedback
         _wait = new(_interval);
     }
     
-    public void Play()
+    public void Play(ClickInfo info)
     {
         if (_flashRoutine != null)
         {

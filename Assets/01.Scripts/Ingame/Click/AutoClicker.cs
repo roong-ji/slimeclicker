@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class AutoClicker : MonoBehaviour
 {
-    [SerializeField] private int _damage;
     [SerializeField] private float _speed;
     private float _timer;
 
@@ -27,7 +26,7 @@ public class AutoClicker : MonoBehaviour
         if (_timer < 1 / _speed) return;
         _timer = 0;
 
-        ClickInfo clickInfo = new(EClickType.Auto, _damage);
+        ClickInfo clickInfo = new(EClickType.Auto, GameManager.Instance.AutoDamage);
             
         foreach (var clickable in _clickables)
         {

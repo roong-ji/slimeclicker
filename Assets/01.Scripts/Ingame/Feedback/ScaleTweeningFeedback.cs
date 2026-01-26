@@ -14,7 +14,7 @@ public class ScaleTweeningFeedback : MonoBehaviour, IFeedback
     }
 #endif
 
-    public void Play()
+    public void Play(ClickInfo info)
     {
         _owner.transform.DOKill();
         _owner.transform.DOScale(_endvalue, _duration).OnComplete(() => 

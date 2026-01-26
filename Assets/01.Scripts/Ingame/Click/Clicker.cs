@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Clicker : MonoBehaviour
 {
-    [SerializeField] private int _damage;
     [SerializeField] private LayerMask _clickLayer;
     Camera _mainCamera;
     
@@ -29,7 +28,7 @@ public class Clicker : MonoBehaviour
 
         if (!hit.collider.TryGetComponent(out IClickable clickTarget)) return;
 
-        ClickInfo clickInfo = new(EClickType.Manual, _damage, hit.point);
+        ClickInfo clickInfo = new(EClickType.Manual, GameManager.Instance.ManualDamage, hit.point);
         clickTarget.OnClick(clickInfo);
     }
 }

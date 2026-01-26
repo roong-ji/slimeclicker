@@ -17,7 +17,7 @@ public class ClickTarget : MonoBehaviour, IClickable
 
         foreach (var feedback in _feedbacks)
         {
-            feedback.Play();
+            feedback.Play(info);
         }
         
         return true;

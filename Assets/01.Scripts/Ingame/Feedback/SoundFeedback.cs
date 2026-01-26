@@ -6,8 +6,10 @@ public class SoundFeedback : MonoBehaviour, IFeedback
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
     
-    public void Play()
+    public void Play(ClickInfo info)
     {
+        if (info.Type == EClickType.Auto) return;
+        
         _audio.pitch = Random.Range(_minPitch, _maxPitch);
         _audio.Play();
     }
