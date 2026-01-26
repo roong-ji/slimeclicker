@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3575304864695221963}
-  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _flashColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
   _interval: 0.3
 --- !u!114 &5132066833709074529
 MonoBehaviour:
