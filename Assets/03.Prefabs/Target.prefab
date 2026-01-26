@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8356351627494921499}
   - component: {fileID: 3385559819559398854}
   - component: {fileID: 2655350139578569775}
+  - component: {fileID: 5132066833709074529}
   m_Layer: 6
   m_Name: Target
   m_TagString: Untagged
@@ -180,3 +181,23 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 3575304864695221963}
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _interval: 0.3
+--- !u!114 &5132066833709074529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213965571335748198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03208b4941e06e84a9bd9e2e4d49debc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageTextUI: {fileID: 2763348845405657589, guid: 4fa8fcebd60f76f45b94c8cbf47d4b2b, type: 3}
+  _canvasRect: {fileID: 0}
+  _targetScale: 2
+  _scaleDownDuration: 0.3
+  _scaleUpDuration: 0.3
+  _randomOffsetRange: 50
+  _fadeStartTime: 0.8
+  _fadeDuration: 0.2
