@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ClickTarget : MonoBehaviour, IClickable
@@ -8,6 +9,8 @@ public class ClickTarget : MonoBehaviour, IClickable
     [SerializeField] private Value _health;
     [SerializeField] private int _goldReward;
     [SerializeField] private int _expReward;
+    private const float DeathTime = 1f;
+    private WaitForSeconds _wait = new(DeathTime);
     
     private IFeedback[] _feedbacks;
     
@@ -33,7 +36,7 @@ public class ClickTarget : MonoBehaviour, IClickable
             feedback.Play(info);
         }
 
-        if (_health.Amount > 0)
+        if (_health.Amount <= 0)
         {
             Death();
         }
@@ -43,6 +46,12 @@ public class ClickTarget : MonoBehaviour, IClickable
     private void Death()
     {
         GameManager.Instance.GetReward(_goldReward, _expReward);
-        Destroy(gameObject, 2f);
+        StartCoroutine(DeathRoutine());
+    }
+    
+    private IEnumerator DeathRoutine()
+    {
+        yield return _wait;
+        gameObject.SetActive(false);
     }
 }

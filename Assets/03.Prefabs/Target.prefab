@@ -150,7 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003863f673897174eb719a3d6bb1ed6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Slime
+  _level: 1
+  _maxHealth: 100
+  _health:
+    _amount: 100
+  _goldReward: 10
+  _expReward: 10
 --- !u!114 &3385559819559398854
 MonoBehaviour:
   m_ObjectHideFlags: 0
