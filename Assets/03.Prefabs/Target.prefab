@@ -163,8 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf5549fb2a7b88469881f21ec5f225e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 7212357659047090925}
-  _endvalue: 1.2
+  _punchAmount: {x: 0.3, y: -0.3, z: 0}
+  _vibrato: 10
+  _elasticity: 1
   _duration: 0.6
 --- !u!114 &2655350139578569775
 MonoBehaviour:
@@ -179,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3575304864695221963}
-  _flashColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
+  _flashColor: {r: 1, g: 0.43867922, b: 0.43867922, a: 1}
   _interval: 0.3
 --- !u!114 &5132066833709074529
 MonoBehaviour:

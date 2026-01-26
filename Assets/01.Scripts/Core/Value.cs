@@ -20,4 +20,9 @@ public class Value
     {
         SetValue(_amount + amount);
     }
+
+    public void SubValue(int amount)
+    {
+        SetValue(_amount - amount);
+    }
 }
