@@ -395,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 3
   _speed: 1
+  _spawner: {fileID: 200039683}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
