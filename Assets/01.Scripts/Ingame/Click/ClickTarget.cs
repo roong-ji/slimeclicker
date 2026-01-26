@@ -4,9 +4,9 @@ public class ClickTarget : MonoBehaviour, IClickable
 {
     [SerializeField] private string _name;
 
-    public bool OnClick()
+    public bool OnClick(ClickInfo info)
     {
-        Debug.Log($"{_name} : 아야");
+        Debug.Log($"{_name} : {info.Damage}");
         return true;
     }
 }

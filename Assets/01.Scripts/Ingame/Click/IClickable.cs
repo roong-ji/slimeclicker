@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IClickable
 {
-    bool OnClick();
+    bool OnClick(ClickInfo info);
 }
