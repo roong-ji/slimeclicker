@@ -29,7 +29,7 @@ public class Clicker : MonoBehaviour
 
         if (!hit.collider.TryGetComponent(out IClickable clickTarget)) return;
 
-        ClickInfo clickInfo = new(EClickType.Manual, _damage);
+        ClickInfo clickInfo = new(EClickType.Manual, _damage, hit.point);
         clickTarget.OnClick(clickInfo);
     }
 }

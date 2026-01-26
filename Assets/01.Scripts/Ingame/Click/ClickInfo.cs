@@ -2,12 +2,14 @@ using UnityEngine;
 
 public struct ClickInfo
 {
-    public EClickType ClickType;
+    public EClickType Type;
     public int Damage;
+    public Vector2 Point;
 
-    public ClickInfo(EClickType clickType, int damage)
+    public ClickInfo(EClickType type, int damage, Vector2 point = default)
     {
-        ClickType = clickType;
+        Type = type;
         Damage = damage;
+        Point = point;
     }
 }
