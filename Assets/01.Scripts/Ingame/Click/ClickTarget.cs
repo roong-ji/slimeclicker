@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClickTarget : MonoBehaviour, IClickable
 {
     [SerializeField] private string _name;
 
-    private List<IFeedback> _feedbacks;
+    private IFeedback[] _feedbacks;
     
     private void Awake()
     {
-        _feedbacks = new List<IFeedback>(GetComponents<IFeedback>());
+        _feedbacks = GetComponents<IFeedback>();
     }
 
     public bool OnClick(ClickInfo info)
