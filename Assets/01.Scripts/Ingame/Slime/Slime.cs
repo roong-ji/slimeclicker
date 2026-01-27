@@ -70,6 +70,7 @@ public class Slime : MonoBehaviour, IClickable
             feedback.OnDespawn();
         }
         
+        GameManager.Instance.UnregisterSlime(this);
         gameObject.SetActive(false);
     }
 }

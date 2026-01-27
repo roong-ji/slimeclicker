@@ -9,11 +9,7 @@ public class SlimeSpawner : MonoBehaviour
 
     private List<Slime> _slimePool = new();
     
-    private List<Slime> _slimes = new();
-    public List<Slime> Slimes => _slimes;
-    
     private float _timer = 0;
-    private int _count = 0;
 
     private void Update()
     {
@@ -38,9 +34,7 @@ public class SlimeSpawner : MonoBehaviour
             movement.SetMoveArea(_spawnArea);
         }
         
-        _slimes.Add(slime);
-        
-        ++_count;
+        GameManager.Instance.RegisterSlime(slime);
     }
     
     private Slime GetSlimeFromPool()

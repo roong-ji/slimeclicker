@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Value ExpReward;
 
     public float DamageFactor;
+
+    public HashSet<Slime> Slimes = new();
     
     private void Awake()
     {
@@ -37,5 +39,15 @@ public class GameManager : MonoBehaviour
     {
         ManualDamage.MulValue(DamageFactor);
         AutoDamage.MulValue(DamageFactor);
+    }
+    
+    public void RegisterSlime(Slime slime)
+    {
+        Slimes.Add(slime);
+    }
+
+    public void UnregisterSlime(Slime slime)
+    {
+        Slimes.Remove(slime);
     }
 }
