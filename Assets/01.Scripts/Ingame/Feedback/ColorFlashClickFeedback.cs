@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ColorFlashFeedback : MonoBehaviour, IFeedback
+public class ColorFlashClickFeedback : MonoBehaviour, IClickFeedback
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Color _flashColor;

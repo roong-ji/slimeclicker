@@ -12,11 +12,15 @@ public class Slime : MonoBehaviour, IClickable
     private const float DeathTime = 0.5f;
     private static readonly WaitForSeconds _wait = new(DeathTime);
     
-    private IFeedback[] _feedbacks;
+    private IClickFeedback[] _clickFeedbacks;
+    private ISpawnFeedback[] _spawnFeedbacks;
+    private IDespawnFeedback[] _despawnFeedbacks;
     
     private void Awake()
     {
-        _feedbacks = GetComponents<IFeedback>();
+        _clickFeedbacks = GetComponents<IClickFeedback>();
+        _spawnFeedbacks = GetComponents<ISpawnFeedback>();
+        _despawnFeedbacks = GetComponents<IDespawnFeedback>();
     }
 
     public void Initialize(int level)
@@ -24,6 +28,11 @@ public class Slime : MonoBehaviour, IClickable
         _level = level;
         _health.SetValue(level * _maxHealth);
         _healthUI.Setup(_health);
+
+        foreach (var feedback in _spawnFeedbacks)
+        {
+            feedback.OnSpawn();
+        }
     }
 
     public bool OnClick(ClickInfo info)
@@ -32,7 +41,7 @@ public class Slime : MonoBehaviour, IClickable
         
         _health.SubValue(info.Damage);
         
-        foreach (var feedback in _feedbacks)
+        foreach (var feedback in _clickFeedbacks)
         {
             feedback.Play(info);
         }
@@ -48,6 +57,11 @@ public class Slime : MonoBehaviour, IClickable
     {
         GameManager.Instance.GetReward();
         StartCoroutine(DeathRoutine());
+
+        foreach (var feedback in _despawnFeedbacks)
+        {
+            feedback.OnDespawn();
+        }
     }
     
     private IEnumerator DeathRoutine()

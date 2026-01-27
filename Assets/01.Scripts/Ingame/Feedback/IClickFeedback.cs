@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IFeedback
+public interface IClickFeedback
 {
     void Play(ClickInfo info);
 }

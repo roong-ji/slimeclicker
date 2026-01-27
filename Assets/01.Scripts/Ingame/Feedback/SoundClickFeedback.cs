@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SoundFeedback : MonoBehaviour, IFeedback
+public class SoundClickFeedback : MonoBehaviour, IClickFeedback
 {
     [SerializeField] private AudioSource _audio;
     [SerializeField] private float _minPitch;

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ScaleTweeningFeedback : MonoBehaviour, IFeedback
+public class ScaleTweeningClickFeedback : MonoBehaviour, IClickFeedback
 {
     [Header("Settings")]
     [SerializeField] private Vector3 _punchAmount = new Vector3(0.3f, -0.3f, 0);

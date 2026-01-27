@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageFloaterFeedback : MonoBehaviour, IFeedback
+public class DamageFloaterClickFeedback : MonoBehaviour, IClickFeedback
 {
     public void Play(ClickInfo info)
     {
