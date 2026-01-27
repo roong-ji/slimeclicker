@@ -16,16 +16,10 @@ public class DamageFloater : MonoBehaviour
     [SerializeField] private float _fadeDuration = 0.2f;
 
     private Sequence _sequence;
-    private Camera _mainCamera;
-    
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
-    }
 
-    public void Show(int damage)
+    public void Show(double damage)
     {
-        _damageTextUI.SetText("{0}", damage);
+        _damageTextUI.SetText(damage.ToUnitString());
         _damageTextUI.alpha = 1f;
         transform.localScale = Vector3.one;
 

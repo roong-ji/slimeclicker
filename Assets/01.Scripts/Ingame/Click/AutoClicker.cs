@@ -26,6 +26,7 @@ public class AutoClicker : MonoBehaviour
             
         foreach (var clickable in _spawner.Slimes)
         {
+            clickInfo.Point = clickable.transform.position;
             clickable.OnClick(clickInfo);
         }
     }

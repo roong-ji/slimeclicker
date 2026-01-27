@@ -6,7 +6,7 @@ public class SlimeHealthUI : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     private Value _healthReference;
-    private int _maxHp;
+    private double _maxHp;
 
     // 슬라임이 초기화될 때 호출해줄 함수
     public void Setup(Value health)
@@ -35,9 +35,9 @@ public class SlimeHealthUI : MonoBehaviour
     private const float _hidetime = 1.5f;
     private static readonly WaitForSeconds _wait = new(_hidetime);
     
-    private void UpdateSlider(int currentHp)
+    private void UpdateSlider(double currentHp)
     {
-        _slider.value = (float)currentHp / _maxHp;
+        _slider.value = (float)(currentHp / _maxHp);
 
         // 맞았을 때 체력바 활성화 및 자동 숨김 처리
         gameObject.SetActive(true);

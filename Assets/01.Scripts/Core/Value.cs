@@ -1,27 +1,26 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class Value
 {
-    [SerializeField] private int _amount;
-    public int Amount => _amount;
+    [SerializeField] private double _amount;
+    public double Amount => _amount;
+    
+    public event Action<double> OnValueChanged;
 
-    public event Action<int> OnValueChanged;
-
-    public void SetValue(int amount)
+    public void SetValue(double amount)
     {
-        if (_amount == amount) return;
         _amount = amount;
         OnValueChanged?.Invoke(_amount);
     }
 
-    public void AddValue(int amount)
+    public void AddValue(double amount)
     {
         SetValue(_amount + amount);
     }
 
-    public void SubValue(int amount)
+    public void SubValue(double amount)
     {
         SetValue(_amount - amount);
     }
