@@ -18,10 +18,9 @@ public class SoundSpawner : MonoBehaviour
     {
         GameObject soundObject = _pool.Spawn(transform);
         if (!soundObject.TryGetComponent(out AudioSource audio)) return;
-        if (isRandomPitch)
-        {
-            audio.pitch = Random.Range(_minPitch, _maxPitch);
-        }
+        
+        audio.pitch = isRandomPitch ? Random.Range(_minPitch, _maxPitch) : 1;
+        
         audio.PlayOneShot(clip);
         LeanPool.Despawn(soundObject, clip.length);
     }
