@@ -7,4 +7,9 @@ public class Effect : MonoBehaviour
     {
         LeanPool.Despawn(gameObject);
     }
+    
+    private void OnParticleSystemStopped()
+    {
+        LeanPool.Despawn(gameObject);
+    }
 }
