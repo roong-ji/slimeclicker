@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
@@ -17,9 +18,14 @@ public class ValuePresenter : MonoBehaviour
     {
         _value = value;
         _textUI.SetText(value.Amount.ToUnitString());
-        value.OnValueChanged += Refresh;
+        _value.OnValueChanged += Refresh;
     }
-    
+
+    private void OnDestroy()
+    {
+        _value.OnValueChanged -= Refresh;
+    }
+
     private void Refresh(double amount)
     {
         _countTween?.Kill();

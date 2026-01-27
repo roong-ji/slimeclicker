@@ -1,20 +1,38 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelPresenter : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textUI;
-    private Value _level;
+    [SerializeField] private TextMeshProUGUI _levelTextUI;
+    [SerializeField] private TextMeshProUGUI _expTextUI;
+    [SerializeField] private Slider _expSlider;
+    [SerializeField] private GameObject _levelEffect;
+    private Level _level;
     
-    public void Initialize(Value level)
+    public void Initialize(Level level)
     {
         _level = level;
-        Refresh(level.Amount);
-        level.OnValueChanged += Refresh;
+        RefreshLevel(level.Value);
+        RefreshExp(level.Exp, level.MaxExp);
+        _level.OnLevelUp += RefreshLevel;
+        _level.OnExpChanged += RefreshExp;
+    }
+
+    private void OnDestroy()
+    {
+        _level.OnLevelUp -= RefreshLevel;
+        _level.OnExpChanged -= RefreshExp;
     }
     
-    private void Refresh(double amount)
+    private void RefreshLevel(int level)
     {
-        _textUI.SetText("Lv.{0}", (int)amount);
+        _levelTextUI.SetText("Lv.{0}", level);
+    }
+
+    private void RefreshExp(double exp, double maxExp)
+    {
+        _expTextUI.SetText($"{exp.ToUnitString()} / {maxExp.ToUnitString()}");
+        _expSlider.value = (float)(exp / maxExp);
     }
 }
