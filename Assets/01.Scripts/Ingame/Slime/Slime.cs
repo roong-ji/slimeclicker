@@ -57,11 +57,6 @@ public class Slime : MonoBehaviour, IClickable
     {
         GameManager.Instance.GetReward();
         StartCoroutine(DeathRoutine());
-
-        foreach (var feedback in _despawnFeedbacks)
-        {
-            feedback.OnDespawn();
-        }
     }
     
     private IEnumerator DeathRoutine()
@@ -69,6 +64,12 @@ public class Slime : MonoBehaviour, IClickable
         _healthUI.gameObject.SetActive(false);
         
         yield return _wait;
+        
+        foreach (var feedback in _despawnFeedbacks)
+        {
+            feedback.OnDespawn();
+        }
+        
         gameObject.SetActive(false);
     }
 }
