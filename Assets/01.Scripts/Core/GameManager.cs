@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Level Level;
+    public Stage Stage;
     
     public Value ManualDamage; 
     public Value AutoDamage;
@@ -49,5 +50,6 @@ public class GameManager : MonoBehaviour
     public void UnregisterSlime(Slime slime)
     {
         Slimes.Remove(slime);
+        Stage.AddKill();
     }
 }

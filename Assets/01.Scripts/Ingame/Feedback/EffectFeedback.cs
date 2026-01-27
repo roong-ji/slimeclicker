@@ -8,9 +8,13 @@ public class EffectFeedback : MonoBehaviour, IClickFeedback, ISpawnFeedback, IDe
         {
             EffectSpawner.Instance.ShowClickEffect(info.Point);
         }
-        else
+        else if (info.Type == EClickType.Auto)
         {
             EffectSpawner.Instance.ShowAutoClickEffect(transform.position);
+        }
+        else
+        {
+            EffectSpawner.Instance.ShowFeverClickEffect(transform.position);
         }
     }
     
