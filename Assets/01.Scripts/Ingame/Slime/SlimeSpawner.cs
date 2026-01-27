@@ -33,6 +33,11 @@ public class SlimeSpawner : MonoBehaviour
         slime.gameObject.SetActive(true);
         slime.Initialize(1);
         
+        if (slime.TryGetComponent(out SlimeMovement movement))
+        {
+            movement.SetMoveArea(_spawnArea);
+        }
+        
         _slimes.Add(slime);
         
         ++_count;
