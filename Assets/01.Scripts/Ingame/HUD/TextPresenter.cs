@@ -1,10 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class TextPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TextPresenter : MonoBehaviour
 {
-    [SerializeField] private string _text;
     [SerializeField] private TextMeshProUGUI _textUI;
     private Value _value;
 
@@ -17,15 +15,5 @@ public class TextPresenter : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void Refresh(double amount)
     {
         _textUI.SetText(amount.ToUnitString());
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Tooltip.Instance.Show(_text);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Tooltip.Instance.Hide();
     }
 }
