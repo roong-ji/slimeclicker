@@ -36,7 +36,7 @@ MonoBehaviour:
   m_fallbackFontAssets: []
   m_matchMaterialPreset: 1
   m_HideSubTextObjects: 0
-  m_defaultSpriteAsset: {fileID: 11400000, guid: 8974afeccb1c0c54bba898d0e4f20a52, type: 2}
+  m_defaultSpriteAsset: {fileID: 11400000, guid: 9fa74fcaaaf35684cbc8fc9482f058f5, type: 2}
   m_defaultSpriteAssetPath: Sprite Assets/
   m_enableEmojiSupport: 1
   m_MissingCharacterSpriteUnicode: 0
