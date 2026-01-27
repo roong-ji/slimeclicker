@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class SoundFeedback : MonoBehaviour, IClickFeedback, ISpawnFeedback, IDespawnFeedback
 {
-    [SerializeField] private AudioSource _audio;
-
     [SerializeField] private AudioClip _clickClip;
     [SerializeField] private AudioClip _spawnClip;
     [SerializeField] private AudioClip _despawnClip;
@@ -30,7 +28,6 @@ public class SoundFeedback : MonoBehaviour, IClickFeedback, ISpawnFeedback, IDes
 
     private void PlaySound(AudioClip clip)
     {
-        _audio.pitch = Random.Range(_minPitch, _maxPitch);
-        _audio.PlayOneShot(clip);
+        SoundSpawner.Instance.PlayClip(clip, true);
     }
 }

@@ -16,16 +16,16 @@ public class EffectSpawner : MonoBehaviour
 
     public void ShowClickEffect(Vector3 position)
     {
-        GameObject effectObject = _clickEffectPool.Spawn(position, Quaternion.identity);
+        GameObject effectObject = _clickEffectPool.Spawn(position, Quaternion.identity, transform);
     }
 
     public void ShowSpawnEffect(Vector3 position)
     {
-        GameObject effectObject = _spawnEffectPool.Spawn(position, Quaternion.identity);
+        GameObject effectObject = _spawnEffectPool.Spawn(position, Quaternion.identity, transform);
     }
 
     public void ShowDespawnEffect(Vector3 position)
     {
-        GameObject effectObject = _despawnEffectPool.Spawn(position, Quaternion.identity);
+        GameObject effectObject = _despawnEffectPool.Spawn(position, Quaternion.identity, transform);
     }
 }

@@ -7,7 +7,8 @@ public class LevelUpTitle : MonoBehaviour
     [SerializeField] private float _duration = 1.0f;
     [SerializeField] private float _moveDistance = 100f;
     [SerializeField] private Ease _easeType = Ease.OutBack;
-
+    [SerializeField] private AudioClip _levelupClip;
+    
     private Vector3 _originPos;
     private CanvasGroup _canvasGroup;
 
@@ -27,7 +28,8 @@ public class LevelUpTitle : MonoBehaviour
         transform.localPosition = _originPos;
         transform.localScale = Vector3.zero;
         _canvasGroup.alpha = 1;
-
+        SoundSpawner.Instance.PlayClip(_levelupClip);
+        
         // 1. 스케일 연출 (0에서 1로 커짐)
         transform.DOScale(Vector3.one, _duration * 0.3f)
             .SetEase(_easeType);
