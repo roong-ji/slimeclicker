@@ -24,7 +24,6 @@ public class AutoClicker : MonoBehaviour
         var Slimes = GameManager.Instance.Slimes;
         foreach (var clickable in Slimes)
         {
-            clickInfo.Point = clickable.transform.position;
             clickable.OnClick(clickInfo);
         }
     }

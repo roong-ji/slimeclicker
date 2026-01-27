@@ -4,7 +4,14 @@ public class EffectFeedback : MonoBehaviour, IClickFeedback, ISpawnFeedback, IDe
 {
     public void Play(ClickInfo info)
     {
-        EffectSpawner.Instance.ShowClickEffect(info.Point);
+        if (info.Type == EClickType.Manual)
+        {
+            EffectSpawner.Instance.ShowClickEffect(info.Point);
+        }
+        else
+        {
+            EffectSpawner.Instance.ShowAutoClickEffect(transform.position);
+        }
     }
     
     public void OnSpawn()
