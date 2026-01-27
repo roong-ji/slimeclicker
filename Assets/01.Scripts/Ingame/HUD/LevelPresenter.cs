@@ -7,13 +7,13 @@ public class LevelPresenter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _levelTextUI;
     [SerializeField] private TextMeshProUGUI _expTextUI;
     [SerializeField] private Slider _expSlider;
-    [SerializeField] private GameObject _levelEffect;
+    [SerializeField] private LevelUpTitle _levelEffect;
     private Level _level;
     
     public void Initialize(Level level)
     {
         _level = level;
-        RefreshLevel(level.Value);
+        _levelTextUI.SetText("Lv.{0}", level.Value);
         RefreshExp(level.Exp, level.MaxExp);
         _level.OnLevelUp += RefreshLevel;
         _level.OnExpChanged += RefreshExp;
@@ -28,6 +28,7 @@ public class LevelPresenter : MonoBehaviour
     private void RefreshLevel(int level)
     {
         _levelTextUI.SetText("Lv.{0}", level);
+        _levelEffect.Play();
     }
 
     private void RefreshExp(double exp, double maxExp)
