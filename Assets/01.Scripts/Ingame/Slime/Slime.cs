@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class ClickTarget : MonoBehaviour, IClickable
+public class Slime : MonoBehaviour, IClickable
 {
     [Header("설정")]
     [SerializeField] private int _level;
     [SerializeField] private int _maxHealth;
     [SerializeField] private Value _health;
-    [SerializeField] private int _goldReward;
-    [SerializeField] private int _expReward;
-    private const float DeathTime = 1f;
+    [SerializeField] private SlimeHealthUI _healthUI;
+    
+    private const float DeathTime = 0.5f;
     private WaitForSeconds _wait = new(DeathTime);
     
     private IFeedback[] _feedbacks;
@@ -23,6 +23,7 @@ public class ClickTarget : MonoBehaviour, IClickable
     {
         _level = level;
         _health.SetValue(level * _maxHealth);
+        _healthUI.Setup(_health);
     }
 
     public bool OnClick(ClickInfo info)
@@ -45,7 +46,7 @@ public class ClickTarget : MonoBehaviour, IClickable
 
     private void Death()
     {
-        GameManager.Instance.GetReward(_goldReward, _expReward);
+        GameManager.Instance.GetReward();
         StartCoroutine(DeathRoutine());
     }
     

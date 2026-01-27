@@ -13,11 +13,11 @@ public class SlimeMovement : MonoBehaviour
 
     private BoxCollider2D _spawnArea;
     private bool _isMoving = false;
-    private ClickTarget _clickTarget;
-
+    private SpriteRenderer _spriteRenderer;
+    
     private void Awake()
     {
-        _clickTarget = GetComponent<ClickTarget>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetMoveArea(BoxCollider2D area)
@@ -50,7 +50,7 @@ public class SlimeMovement : MonoBehaviour
             // 좌우 반전 (이동 방향에 따라 스프라이트 돌리기)
             float direction = targetPos.x - transform.position.x;
             if (Mathf.Abs(direction) > 0.1f)
-                transform.localScale = new Vector3(direction > 0 ? -1 : 1, 1, 1);
+                _spriteRenderer.flipX = direction < 0;
 
             // DOJump(목적지, 점프력, 점프횟수, 시간)
             transform.DOJump(targetPos, _jumpPower, 1, _jumpDuration)

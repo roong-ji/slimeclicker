@@ -4,13 +4,13 @@ using UnityEngine;
 public class SlimeSpawner : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D _spawnArea;
-    [SerializeField] private ClickTarget _slimePrefab;
+    [SerializeField] private Slime _slimePrefab;
     [SerializeField] private float _spawnSpeed;
 
-    private List<ClickTarget> _slimePool = new();
+    private List<Slime> _slimePool = new();
     
-    private List<ClickTarget> _slimes = new();
-    public List<ClickTarget> Slimes => _slimes;
+    private List<Slime> _slimes = new();
+    public List<Slime> Slimes => _slimes;
     
     private float _timer = 0;
     private int _count = 0;
@@ -27,7 +27,7 @@ public class SlimeSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        ClickTarget slime = GetSlimeFromPool();
+        Slime slime = GetSlimeFromPool();
         
         slime.transform.position = GetRandomPosition();
         slime.gameObject.SetActive(true);
@@ -43,7 +43,7 @@ public class SlimeSpawner : MonoBehaviour
         ++_count;
     }
     
-    private ClickTarget GetSlimeFromPool()
+    private Slime GetSlimeFromPool()
     {
         foreach (var pooledSlime in _slimePool)
         {
@@ -53,7 +53,7 @@ public class SlimeSpawner : MonoBehaviour
             }
         }
 
-        ClickTarget newSlime = Instantiate(_slimePrefab, transform);
+        Slime newSlime = Instantiate(_slimePrefab, transform);
         
         _slimePool.Add(newSlime);
         return newSlime;

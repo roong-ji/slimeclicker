@@ -11,15 +11,18 @@ public class GameManager : MonoBehaviour
 
     public Value Level;
     
+    public Value GoldReward;
+    public Value ExpReward;
+    
     private void Awake()
     {
         Instance = this;
         Level.SetValue(1);
     }
 
-    public void GetReward(int gold, int exp)
+    public void GetReward()
     {
-        Gold.AddValue(gold);
-        Exp.AddValue(exp);
+        Gold.AddValue(GoldReward.Amount);
+        Exp.AddValue(ExpReward.Amount);
     }
 }
