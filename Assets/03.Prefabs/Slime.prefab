@@ -349,7 +349,7 @@ MonoBehaviour:
   _audio: {fileID: 8507831551403252797}
   _clickClip: {fileID: 8300000, guid: 5c9ef595b4fa9b34886a6c6bf4528872, type: 3}
   _spawnClip: {fileID: 8300000, guid: 8af2b40e26d566a4fb5917402739cc73, type: 3}
-  _despawnClip: {fileID: 8300000, guid: 96501fe46f794bf438ac75e63845a9e0, type: 3}
+  _despawnClip: {fileID: 8300000, guid: 364da270a0c18224b8fe1255835af9dc, type: 3}
   _minPitch: 0.9
   _maxPitch: 1.1
 --- !u!82 &8507831551403252797

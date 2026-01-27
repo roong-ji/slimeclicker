@@ -1,28 +1,41 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public Level Level;
+    
     public Value ManualDamage; 
     public Value AutoDamage;
     public Value Gold;
-    public Value Exp;
-
-    public Value Level;
     
     public Value GoldReward;
     public Value ExpReward;
+
+    public float DamageFactor;
     
     private void Awake()
     {
         Instance = this;
-        Level.SetValue(1);
+        Level.OnLevelUp += LevelUp;
+    }
+
+    private void OnDestroy()
+    {
+        Level.OnLevelUp -= LevelUp;
     }
 
     public void GetReward()
     {
         Gold.AddValue(GoldReward.Amount);
-        Exp.AddValue(ExpReward.Amount);
+        Level.AddExp(ExpReward.Amount);
+    }
+
+    private void LevelUp(int level)
+    {
+        ManualDamage.MulValue(DamageFactor);
+        AutoDamage.MulValue(DamageFactor);
     }
 }

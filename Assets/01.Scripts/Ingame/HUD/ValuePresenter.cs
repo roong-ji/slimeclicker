@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 
-public class TextPresenter : MonoBehaviour
+public class ValuePresenter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textUI;
     private Value _value;

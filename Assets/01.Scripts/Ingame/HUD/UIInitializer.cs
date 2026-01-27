@@ -3,12 +3,12 @@ using UnityEngine;
 public class UIInitializer : MonoBehaviour
 {
     [Header("UI 연결")]
-    [SerializeField] private TextPresenter _goldPresenter;
-    [SerializeField] private TextPresenter _manualDmgPresenter;
-    [SerializeField] private TextPresenter _autoDmgPresenter;
-    [SerializeField] private TextPresenter _goldRewardPresenter;
-    [SerializeField] private TextPresenter _expRewardPresenter;
-    [SerializeField] private TextPresenter _levelPresenter;
+    [SerializeField] private ValuePresenter _goldPresenter;
+    [SerializeField] private ValuePresenter _manualDmgPresenter;
+    [SerializeField] private ValuePresenter _autoDmgPresenter;
+    [SerializeField] private ValuePresenter _goldRewardPresenter;
+    [SerializeField] private ValuePresenter _expRewardPresenter;
+    [SerializeField] private LevelPresenter _levelPresenter;
     
     private void Start()
     {

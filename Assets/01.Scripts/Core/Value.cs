@@ -24,4 +24,9 @@ public class Value
     {
         SetValue(_amount - amount);
     }
+
+    public void MulValue(double amount)
+    {
+        SetValue(_amount * amount);
+    }
 }
