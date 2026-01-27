@@ -10,7 +10,7 @@ public class Slime : MonoBehaviour, IClickable
     [SerializeField] private SlimeHealthUI _healthUI;
     
     private const float DeathTime = 0.5f;
-    private WaitForSeconds _wait = new(DeathTime);
+    private static readonly WaitForSeconds _wait = new(DeathTime);
     
     private IFeedback[] _feedbacks;
     
@@ -52,6 +52,8 @@ public class Slime : MonoBehaviour, IClickable
     
     private IEnumerator DeathRoutine()
     {
+        _healthUI.gameObject.SetActive(false);
+        
         yield return _wait;
         gameObject.SetActive(false);
     }
