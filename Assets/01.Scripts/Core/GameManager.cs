@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public Level Level;
     public Stage Stage;
+    public Fever Fever;
     
     public Value ManualDamage; 
     public Value AutoDamage;
@@ -51,5 +52,6 @@ public class GameManager : MonoBehaviour
     {
         Slimes.Remove(slime);
         Stage.AddKill();
+        Fever.AddGauge();
     }
 }

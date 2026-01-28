@@ -7,32 +7,14 @@ public class Stage
     [Header("Stage Info")]
     public int CurrentStage = 1;
     public int KillCount = 0;
-    public int KillsRequiredPerStage = 10;
-
-    [Header("Fever Info")]
-    public int FeverKillCount = 0;
-    public int FeverThreshold = 5;
-    public bool IsFeverActive = false;
+    public int KillsRequiredPerStage = 10; 
 
     [Header("Balance")]
     public float DifficultyFactor = 1.2f;
-
-    public event Action OnFeverStarted;
-
+    
     public void AddKill()
     {
         KillCount++;
-        
-        // 피버 게이지 상승 (피버 중이 아닐 때만)
-        if (!IsFeverActive)
-        {
-            FeverKillCount++;
-            if (FeverKillCount >= FeverThreshold)
-            {
-                IsFeverActive = true;
-                OnFeverStarted?.Invoke();
-            }
-        }
 
         // 스테이지 진행 체크
         if (KillCount >= KillsRequiredPerStage)
