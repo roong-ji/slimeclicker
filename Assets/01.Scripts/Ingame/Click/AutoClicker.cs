@@ -21,8 +21,8 @@ public class AutoClicker : MonoBehaviour
 
         ClickInfo clickInfo = new(EClickType.Auto, _damage.Amount);
 
-        var Slimes = GameManager.Instance.Slimes;
-        foreach (var clickable in Slimes)
+        var slimes = GameManager.Instance.Slimes;
+        foreach (var clickable in slimes)
         {
             clickable.OnClick(clickInfo);
         }

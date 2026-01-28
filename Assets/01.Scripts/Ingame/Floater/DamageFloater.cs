@@ -11,7 +11,6 @@ public class DamageFloater : MonoBehaviour
     [SerializeField] private float _targetScale = 2f;
     [SerializeField] private float _scaleDownDuration = 0.3f;
     [SerializeField] private float _scaleUpDuration = 0.3f;
-    [SerializeField] private float _randomOffsetRange = 50f;
     [SerializeField] private float _fadeStartTime = 0.8f;
     [SerializeField] private float _fadeDuration = 0.2f;
 

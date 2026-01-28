@@ -7,9 +7,6 @@ public class SoundFeedback : MonoBehaviour, IClickFeedback, ISpawnFeedback, IDes
     [SerializeField] private AudioClip _spawnClip;
     [SerializeField] private AudioClip _despawnClip;
     
-    [SerializeField] private float _minPitch;
-    [SerializeField] private float _maxPitch;
-    
     public void Play(ClickInfo info)
     {
         if (info.Type == EClickType.Auto) return;
