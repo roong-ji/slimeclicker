@@ -4,6 +4,9 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Texture2D _cursor;
+
+    [SerializeField] private GameData _data;
+    public GameData Data => _data;
     
     public Level Level;
     public Stage Stage;
@@ -21,6 +24,14 @@ public class GameManager : Singleton<GameManager>
     
     protected override void OnInit()
     {
+        Level = _data.Level;
+        Stage = _data.Stage;
+        Fever = _data.Fever; 
+        ManualDamage = _data.ManualDamage; 
+        AutoDamage = _data.AutoDamage; 
+        GoldReward = _data.GoldReward; 
+        ExpReward = _data.ExpReward;
+        
         Cursor.SetCursor(_cursor, Vector2.zero, CursorMode.Auto);
         Level.OnLevelUp += LevelUp;
     }
@@ -28,6 +39,11 @@ public class GameManager : Singleton<GameManager>
     private void OnDestroy()
     {
         Level.OnLevelUp -= LevelUp;
+    }
+
+    private void OnApplicationQuit()
+    {
+        FileIO.Save(_data);
     }
 
     public void GetReward()

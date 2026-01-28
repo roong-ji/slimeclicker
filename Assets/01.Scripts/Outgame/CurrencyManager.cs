@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class CurrencyManager : Singleton<CurrencyManager>
 { 
-    [SerializeField] private Value _gold;
+    private Value _gold;
     public Value Gold => _gold;
-    
-    
+
+    private void Start()
+    {
+        _gold = GameManager.Instance.Data.Gold;
+    }
 }
