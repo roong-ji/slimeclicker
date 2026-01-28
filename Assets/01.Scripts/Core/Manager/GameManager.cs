@@ -24,9 +24,10 @@ public class GameManager : Singleton<GameManager>
     
     protected override void OnInit()
     {
+        FileIO.Load(_data);
+        
         Level = _data.Level;
         Stage = _data.Stage;
-        Fever = _data.Fever; 
         ManualDamage = _data.ManualDamage; 
         AutoDamage = _data.AutoDamage; 
         GoldReward = _data.GoldReward; 

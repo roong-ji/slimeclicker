@@ -2,11 +2,10 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class GameData : MonoBehaviour
+public class GameData
 {
     public Level Level;
     public Stage Stage;
-    public Fever Fever;
     
     public Value ManualDamage; 
     public Value AutoDamage;
@@ -15,7 +14,7 @@ public class GameData : MonoBehaviour
     public Value ExpReward;
 
     public Value Gold;
-
+    
     public string GetSummary()
     {
         return string.Empty;
