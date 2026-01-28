@@ -11,7 +11,8 @@ public class Stage
 
     [Header("Balance")]
     public float HealthRate = 1;
-    public float DifficultyFactor = 1.25f;
+    public float DifficultyFactor = 1.5f;
+    public float StageFactor = 1.2f;
     
     public void AddKill()
     {
@@ -29,6 +30,6 @@ public class Stage
         CurrentStage++;
         KillCount = 0;
         HealthRate *= DifficultyFactor;
-        KillsRequiredPerStage = (int)(KillsRequiredPerStage * DifficultyFactor);
+        KillsRequiredPerStage = (int)(KillsRequiredPerStage * StageFactor);
     }
 }
