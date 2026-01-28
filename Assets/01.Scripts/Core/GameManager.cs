@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Texture2D _cursor;
+    
     public static GameManager Instance;
 
     public Level Level;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Cursor.SetCursor(_cursor, Vector2.zero, CursorMode.Auto);
         Level.OnLevelUp += LevelUp;
     }
 
