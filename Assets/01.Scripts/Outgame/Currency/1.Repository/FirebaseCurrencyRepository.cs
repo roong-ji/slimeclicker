@@ -1,12 +1,12 @@
 ﻿public class FirebaseCurrencyRepository : ICurrencyRepository
 {
-    public void Save<T>(T data)
+    public void Save(Currency currency)
     {
         
     }
 
-    public void Load<T>(T data)
+    public Currency Load()
     {
-        
+        return default;
     }
 }

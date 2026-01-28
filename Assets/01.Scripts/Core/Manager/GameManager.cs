@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GetReward()
     {
-        CurrencyManager.Instance.Gold.AddValue(GoldReward.Amount);
+        CurrencyManager.Instance.Add(GoldReward.Amount);
         Level.AddExp(ExpReward.Amount);
     }
 
