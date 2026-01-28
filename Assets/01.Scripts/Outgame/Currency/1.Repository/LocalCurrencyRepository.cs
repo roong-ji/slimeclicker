@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class LocalCurrencyRepository : ICurrencyRepository<Value>
+public class LocalCurrencyRepository : ICurrencyRepository
 {
-    public void Save(Value data)
+    public void Save<T>(T data)
     {
         FileIO.Save(data);
     }
 
-    public void Load(Value data)
+    public void Load<T>(T data)
     {
         FileIO.Load(data);
     }

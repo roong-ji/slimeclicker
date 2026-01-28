@@ -1,5 +1,5 @@
-﻿public interface ICurrencyRepository<T>
+﻿public interface ICurrencyRepository
 {
-    void Save(T data);
-    void Load(T data);
+    void Save<T>(T data);
+    void Load<T>(T data);
 }

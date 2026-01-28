@@ -5,7 +5,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     private readonly Value _gold = new();
     public Value Gold => _gold;
 
-    private readonly LocalCurrencyRepository _repository = new();
+    private readonly ICurrencyRepository _repository = new LocalCurrencyRepository();
     
     protected override void OnInit()
     {
