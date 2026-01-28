@@ -1,19 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Texture2D _cursor;
     
-    public static GameManager Instance;
-
     public Level Level;
     public Stage Stage;
     public Fever Fever;
     
     public Value ManualDamage; 
     public Value AutoDamage;
-    public Value Gold;
     
     public Value GoldReward;
     public Value ExpReward;
@@ -22,9 +19,8 @@ public class GameManager : MonoBehaviour
 
     public HashSet<Slime> Slimes = new();
     
-    private void Awake()
+    protected override void OnInit()
     {
-        Instance = this;
         Cursor.SetCursor(_cursor, Vector2.zero, CursorMode.Auto);
         Level.OnLevelUp += LevelUp;
     }
@@ -36,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void GetReward()
     {
-        Gold.AddValue(GoldReward.Amount);
+        CurrencyManager.Instance.Gold.AddValue(GoldReward.Amount);
         Level.AddExp(ExpReward.Amount);
     }
 
