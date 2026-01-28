@@ -4,6 +4,10 @@ public class FloaterClickFeedback : MonoBehaviour, IClickFeedback, IDespawnFeedb
 {
     public void Play(ClickInfo info)
     {
+        if (info.Type != EClickType.Manual)
+        {
+            info.Point = transform.position;
+        }
         FloaterSpawner.Instance.ShowDamage(info);
     }
 
