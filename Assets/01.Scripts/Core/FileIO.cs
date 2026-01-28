@@ -15,7 +15,7 @@ public static class FileIO
         s_hashedKey = AES.GetHashedKey(s_securityKey);
     }
 
-    public static void Save(GameData data)
+    public static void Save<T>(T data)
     {
         string json = JsonUtility.ToJson(data);
 
@@ -28,7 +28,7 @@ public static class FileIO
 #endif
     }
 
-    public static bool Load(GameData data)
+    public static bool Load<T>(T data)
     {
         if (!File.Exists(s_saveFilePath)) return false;
 
@@ -51,7 +51,6 @@ public static class FileIO
         
 #if UNITY_EDITOR
         Debug.Log("<color=cyan>[데이터 로드 성공]</color>");
-        Debug.Log(data.GetSummary());
 #endif
 
         return true;
