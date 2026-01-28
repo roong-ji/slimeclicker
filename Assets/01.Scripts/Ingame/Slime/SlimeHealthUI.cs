@@ -19,7 +19,7 @@ public class SlimeHealthUI : MonoBehaviour
         UpdateSlider(health.Amount);
 
         // 이벤트 구독 (데이터가 변하면 UI도 변하게 함)
-        _healthReference.OnValueChanged += UpdateSlider;
+        _healthReference.OnChanged += UpdateSlider;
         
         gameObject.SetActive(false);
     }
@@ -28,7 +28,7 @@ public class SlimeHealthUI : MonoBehaviour
     {
         // 메모리 누수 방지를 위해 이벤트 구독 해제
         if (_healthReference != null)
-            _healthReference.OnValueChanged -= UpdateSlider;
+            _healthReference.OnChanged -= UpdateSlider;
     }
     
     private Coroutine _autoHideRoutine;
