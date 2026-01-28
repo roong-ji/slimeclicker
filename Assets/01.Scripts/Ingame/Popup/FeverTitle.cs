@@ -7,7 +7,6 @@ public class FeverTitle : MonoBehaviour
     [Header("Tween Settings")]
     [SerializeField] private float _duration = 0.5f;
     [SerializeField] private float _startScale = 0.5f;
-    [SerializeField] private float _endScale = 1.2f; // 살짝 커졌다가 돌아오게 설정 가능
 
     private CanvasGroup _canvasGroup;
 
