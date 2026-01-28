@@ -4,8 +4,7 @@ using UnityEngine;
 public class Slime : MonoBehaviour, IClickable
 {
     [Header("설정")]
-    [SerializeField] private int _level;
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _baseHealth;
     [SerializeField] private Value _health;
     [SerializeField] private SlimeHealthUI _healthUI;
     
@@ -23,10 +22,9 @@ public class Slime : MonoBehaviour, IClickable
         _despawnFeedbacks = GetComponents<IDespawnFeedback>();
     }
 
-    public void Initialize(int level)
+    public void Initialize(float rate)
     {
-        _level = level;
-        _health.SetValue(level * _maxHealth);
+        _health.SetValue(rate * _baseHealth);
         _healthUI.Setup(_health);
 
         foreach (var feedback in _spawnFeedbacks)

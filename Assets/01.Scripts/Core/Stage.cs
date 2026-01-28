@@ -10,7 +10,8 @@ public class Stage
     public int KillsRequiredPerStage = 10; 
 
     [Header("Balance")]
-    public float DifficultyFactor = 1.2f;
+    public float HealthRate = 1;
+    public float DifficultyFactor = 1.25f;
     
     public void AddKill()
     {
@@ -27,11 +28,7 @@ public class Stage
     {
         CurrentStage++;
         KillCount = 0;
-    }
-
-    // 현재 스테이지에 따른 수치 계산 공식
-    public double GetScaledValue(double baseValue)
-    {
-        return baseValue * Math.Pow(DifficultyFactor, CurrentStage - 1);
+        HealthRate *= DifficultyFactor;
+        KillsRequiredPerStage = (int)(KillsRequiredPerStage * DifficultyFactor);
     }
 }

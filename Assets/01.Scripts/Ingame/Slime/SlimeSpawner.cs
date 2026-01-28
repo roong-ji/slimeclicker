@@ -8,9 +8,15 @@ public class SlimeSpawner : MonoBehaviour
     [SerializeField] private float _spawnSpeed;
 
     private List<Slime> _slimePool = new();
+    private Stage _stage;
     
     private float _timer = 0;
 
+    private void Start()
+    {
+        _stage = GameManager.Instance.Stage;
+    }
+    
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -27,7 +33,7 @@ public class SlimeSpawner : MonoBehaviour
         
         slime.transform.position = GetRandomPosition();
         slime.gameObject.SetActive(true);
-        slime.Initialize(1);
+        slime.Initialize(_stage.HealthRate);
         
         if (slime.TryGetComponent(out SlimeMovement movement))
         {
