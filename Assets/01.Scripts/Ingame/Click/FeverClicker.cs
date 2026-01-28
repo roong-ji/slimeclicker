@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class FeverClicker : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private FeverTitle _feverTitle;
     [SerializeField] private float _feverDuration = 5f;
     private static WaitForSeconds _wait;
 
@@ -43,6 +44,7 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
 
     private void StartFeverRoutine()
     {
+        _feverTitle.Show();
         gameObject.SetActive(true);
         StartCoroutine(FeverTimer());
     }
@@ -56,6 +58,7 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
     private void EndFever()
     {
         _fever.EndFever();
+        _feverTitle.Hide();
         gameObject.SetActive(false);
     }
 }
