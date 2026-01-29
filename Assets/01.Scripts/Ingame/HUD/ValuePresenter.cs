@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
@@ -6,7 +5,7 @@ using DG.Tweening;
 public class ValuePresenter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textUI;
-    private Value _value;
+    private IReadOnlyValue _value;
 
     [Header("Tween Settings")]
     [SerializeField] private float _duration = 0.5f;
@@ -14,16 +13,16 @@ public class ValuePresenter : MonoBehaviour
     private Tween _countTween;
     private double _displayedValue;
     
-    public void Initialize(Value value)
+    public void Initialize(IReadOnlyValue value)
     {
         _value = value;
         _textUI.SetText(value.Amount.ToUnitString());
-        _value.OnValueChanged += Refresh;
+        _value.OnChanged += Refresh;
     }
 
     private void OnDestroy()
     {
-        _value.OnValueChanged -= Refresh;
+        _value.OnChanged -= Refresh;
     }
 
     private void Refresh(double amount)
