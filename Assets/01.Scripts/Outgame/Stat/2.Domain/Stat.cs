@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Value : IReadOnlyValue
+public class Stat : IReadOnlyValue
 {
     [SerializeField] private double _amount;
     public double Amount => _amount;

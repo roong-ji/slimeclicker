@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AutoClicker : MonoBehaviour
 {
-    private Value _damage;
+    private Stat _damage;
     [SerializeField] private float _speed;
     private float _timer;
     

@@ -9,7 +9,7 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
     private static WaitForSeconds _wait;
 
     private Fever _fever;
-    private Value _damage;
+    private Stat _damage;
 
     private void Start()
     {

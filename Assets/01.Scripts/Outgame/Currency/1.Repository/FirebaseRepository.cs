@@ -1,4 +1,4 @@
-﻿public class FirebaseCurrencyRepository : ICurrencyRepository
+﻿public class FirebaseRepository : IRepository
 {
     public void Save(Currency currency)
     {

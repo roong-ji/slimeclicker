@@ -6,7 +6,7 @@ public class CurrencyManager : Singleton<CurrencyManager>, IReadOnlyValue
     private Currency _gold;
     public double Amount => _gold.Value;
 
-    private readonly ICurrencyRepository _repository = new LocalCurrencyRepository();
+    private readonly IRepository<Currency> _repository = new LocalCurrencyRepository();
     
     public event Action<double> OnChanged;
     

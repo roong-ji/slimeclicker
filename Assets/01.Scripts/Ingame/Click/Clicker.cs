@@ -5,7 +5,7 @@ public class Clicker : MonoBehaviour
     [SerializeField] private LayerMask _clickLayer;
     Camera _mainCamera;
 
-    private Value _damage;
+    private Stat _damage;
     
     private void Start()
     {

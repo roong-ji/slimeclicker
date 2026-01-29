@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LocalCurrencyRepository : ICurrencyRepository
+public class LocalCurrencyRepository : IRepository<Currency>
 {
     public void Save(Currency currency)
     {

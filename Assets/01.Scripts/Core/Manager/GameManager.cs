@@ -9,11 +9,11 @@ public class GameManager : Singleton<GameManager>
     public Stage Stage;
     public Fever Fever;
     
-    public Value ManualDamage; 
-    public Value AutoDamage;
+    public Stat ManualDamage; 
+    public Stat AutoDamage;
     
-    public Value GoldReward;
-    public Value ExpReward;
+    public Stat GoldReward;
+    public Stat ExpReward;
 
     public float DamageFactor;
 
