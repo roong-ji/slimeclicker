@@ -5,12 +5,12 @@ public class Clicker : MonoBehaviour
     [SerializeField] private LayerMask _clickLayer;
     Camera _mainCamera;
 
-    private Stat _damage;
+    private IReadOnlyValue _damage;
     
     private void Start()
     {
         _mainCamera = Camera.main;
-        _damage = GameManager.Instance.ManualDamage;
+        _damage = StatManager.Instance.GetStat(EStatType.ManualDamage);
     }
     
     private void Update()

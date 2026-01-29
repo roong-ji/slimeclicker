@@ -30,7 +30,7 @@ public class UpgradePresenter : MonoBehaviour
     
     private void OnClickUpgrade()
     {
-        StatManager.Instance.TryUpgrade(_targetStatType);
+        UpgradeManager.Instance.TryUpgrade(_targetStatType);
     }
 
     private void OnCurrencyChanged(double gold)
@@ -40,7 +40,7 @@ public class UpgradePresenter : MonoBehaviour
 
     private void RefreshUI(double gold)
     {
-        var cost = StatManager.Instance.GetCost(_targetStatType);
+        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
         _costTextUI.SetText(cost.ToUnitString());
         
         if(gold >= cost) _upgradeButton.Show();

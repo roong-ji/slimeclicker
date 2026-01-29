@@ -19,6 +19,7 @@ public class UIInitializer : MonoBehaviour
     {
         var gm = GameManager.Instance;
         var cm = CurrencyManager.Instance;
+        var sm = StatManager.Instance;
         if (gm == null)
         {
             Debug.LogError("GameManager를 찾을 수 없습니다!");
@@ -26,10 +27,10 @@ public class UIInitializer : MonoBehaviour
         }
 
         _goldPresenter.Initialize(cm);
-        _manualDmgPresenter.Initialize(gm.ManualDamage);
-        _autoDmgPresenter.Initialize(gm.AutoDamage);
-        _goldRewardPresenter.Initialize(gm.GoldReward);
-        _expRewardPresenter.Initialize(gm.ExpReward);
+        _manualDmgPresenter.Initialize(sm.GetStat(EStatType.ManualDamage));
+        _autoDmgPresenter.Initialize(sm.GetStat(EStatType.AutoDamage));
+        _goldRewardPresenter.Initialize(sm.GetStat(EStatType.GoldReward));
+        _expRewardPresenter.Initialize(sm.GetStat(EStatType.ExpReward));
         _levelPresenter.Initialize(gm.Level);
     }
 }

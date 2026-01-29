@@ -8,12 +8,6 @@ public class GameManager : Singleton<GameManager>
     public Level Level;
     public Stage Stage;
     public Fever Fever;
-    
-    public Stat ManualDamage; 
-    public Stat AutoDamage;
-    
-    public Stat GoldReward;
-    public Stat ExpReward;
 
     public float DamageFactor;
 
@@ -32,14 +26,14 @@ public class GameManager : Singleton<GameManager>
 
     public void GetReward()
     {
-        CurrencyManager.Instance.Add(GoldReward.Amount);
-        Level.AddExp(ExpReward.Amount);
+        CurrencyManager.Instance.Add(StatManager.Instance.GetStat(EStatType.GoldReward).Amount);
+        Level.AddExp(StatManager.Instance.GetStat(EStatType.ExpReward).Amount);
     }
 
     private void LevelUp(int level)
     {
-        ManualDamage.MulValue(DamageFactor);
-        AutoDamage.MulValue(DamageFactor);
+        //ManualDamage.MulValue(DamageFactor);
+        //AutoDamage.MulValue(DamageFactor);
     }
     
     public void RegisterSlime(Slime slime)

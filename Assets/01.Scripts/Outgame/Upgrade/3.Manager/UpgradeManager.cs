@@ -17,4 +17,24 @@ public class UpgradeManager : Singleton<UpgradeManager>
             _upgrades.Add(data.Key, upgrade);
         }
     }
+
+    public double GetCost(EStatType statType)
+    {
+        var upgrade = _upgrades.GetValueOrDefault(statType);
+        return upgrade.Cost;
+        
+    }
+    
+    public bool TryUpgrade(EStatType statType)
+    {
+        var upgrade = _upgrades.GetValueOrDefault(statType);
+        var cost = upgrade.Cost;
+
+        if (!CurrencyManager.Instance.TrySpend(cost) 
+            || !upgrade.TryLevelUp()) return false;
+        
+        var value = upgrade.Value;
+        StatManager.Instance.SetStat(statType, value);
+        return true;
+    }
 }

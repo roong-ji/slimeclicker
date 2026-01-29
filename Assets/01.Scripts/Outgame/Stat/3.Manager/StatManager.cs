@@ -9,19 +9,9 @@ public class StatManager : Singleton<StatManager>
         return _stats.GetValueOrDefault(statType);
     }
 
-    public double GetCost(EStatType statType)
+    public void SetStat(EStatType statType, double value)
     {
-        return _stats.GetValueOrDefault(statType).Cost;
-    }
-
-    public bool TryUpgrade(EStatType statType)
-    {
-        if (!_stats.TryGetValue(statType, out var stat)) return false;
-        var cost = stat.Cost;
-        
-        if (!CurrencyManager.Instance.TrySpend(cost)) return false;
-        
-        stat.LevelUp();
-        return true;
+        var stat = _stats.GetValueOrDefault(statType);
+        stat.SetValue(value);
     }
 }
