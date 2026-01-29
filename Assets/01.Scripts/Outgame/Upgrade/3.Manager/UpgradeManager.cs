@@ -30,7 +30,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
         var upgrade = _upgrades.GetValueOrDefault(statType);
         var cost = upgrade.Cost;
 
-        if (!CurrencyManager.Instance.TrySpend(cost) 
+        if (upgrade.IsMaxLevel
+            || !CurrencyManager.Instance.TrySpend(cost) 
             || !upgrade.TryLevelUp()) return false;
         
         var value = upgrade.Value;

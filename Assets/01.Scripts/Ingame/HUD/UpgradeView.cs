@@ -56,5 +56,4 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     {
         Tooltip.Instance.Hide();
     }
-
 }

@@ -8,7 +8,7 @@ public class UIInitializer : MonoBehaviour
     [SerializeField] private ValueView autoDmgView;
     [SerializeField] private ValueView goldRewardView;
     [SerializeField] private ValueView expRewardView;
-    [SerializeField] private LevelPresenter _levelPresenter;
+    [SerializeField] private LevelView levelView;
     
     private void Start()
     {
@@ -31,6 +31,6 @@ public class UIInitializer : MonoBehaviour
         autoDmgView.Initialize(sm.GetStat(EStatType.AutoDamage));
         goldRewardView.Initialize(sm.GetStat(EStatType.GoldReward));
         expRewardView.Initialize(sm.GetStat(EStatType.ExpReward));
-        _levelPresenter.Initialize(gm.Level);
+        levelView.Initialize(gm.Level);
     }
 }
