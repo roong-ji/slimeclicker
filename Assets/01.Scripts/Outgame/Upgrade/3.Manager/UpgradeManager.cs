@@ -6,6 +6,8 @@ public class UpgradeManager : Singleton<UpgradeManager>
 {
     [SerializeField] private UpgradeDataTableSO _dataSO;
     private readonly Dictionary<EStatType, Upgrade> _upgrades = new();
+
+    public event Action OnChanged;
     
     protected override void OnInit()
     {
@@ -34,6 +36,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         var value = upgrade.Value;
         StatManager.Instance.SetStat(statType, value);
         
+        OnChanged?.Invoke();
         return true;
     }
 }

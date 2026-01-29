@@ -3,11 +3,11 @@ using UnityEngine;
 public class UIInitializer : MonoBehaviour
 {
     [Header("UI 연결")]
-    [SerializeField] private ValuePresenter _goldPresenter;
-    [SerializeField] private ValuePresenter _manualDmgPresenter;
-    [SerializeField] private ValuePresenter _autoDmgPresenter;
-    [SerializeField] private ValuePresenter _goldRewardPresenter;
-    [SerializeField] private ValuePresenter _expRewardPresenter;
+    [SerializeField] private ValueView goldView;
+    [SerializeField] private ValueView manualDmgView;
+    [SerializeField] private ValueView autoDmgView;
+    [SerializeField] private ValueView goldRewardView;
+    [SerializeField] private ValueView expRewardView;
     [SerializeField] private LevelPresenter _levelPresenter;
     
     private void Start()
@@ -26,11 +26,11 @@ public class UIInitializer : MonoBehaviour
             return;
         }
 
-        _goldPresenter.Initialize(cm);
-        _manualDmgPresenter.Initialize(sm.GetStat(EStatType.ManualDamage));
-        _autoDmgPresenter.Initialize(sm.GetStat(EStatType.AutoDamage));
-        _goldRewardPresenter.Initialize(sm.GetStat(EStatType.GoldReward));
-        _expRewardPresenter.Initialize(sm.GetStat(EStatType.ExpReward));
+        goldView.Initialize(cm);
+        manualDmgView.Initialize(sm.GetStat(EStatType.ManualDamage));
+        autoDmgView.Initialize(sm.GetStat(EStatType.AutoDamage));
+        goldRewardView.Initialize(sm.GetStat(EStatType.GoldReward));
+        expRewardView.Initialize(sm.GetStat(EStatType.ExpReward));
         _levelPresenter.Initialize(gm.Level);
     }
 }
