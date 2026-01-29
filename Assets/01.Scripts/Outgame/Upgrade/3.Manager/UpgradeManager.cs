@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     [SerializeField] private UpgradeDataTableSO _dataSO;
     private readonly Dictionary<EStatType, Upgrade> _upgrades = new();
-
-    public event Action OnChanged;
     
     protected override void OnInit()
     {
@@ -18,11 +15,9 @@ public class UpgradeManager : Singleton<UpgradeManager>
         }
     }
 
-    public double GetCost(EStatType statType)
+    public Upgrade GetUpgrade(EStatType statType)
     {
-        var upgrade = _upgrades.GetValueOrDefault(statType);
-        return upgrade.Cost;
-        
+        return _upgrades.GetValueOrDefault(statType);
     }
     
     public bool TryUpgrade(EStatType statType)
@@ -37,7 +32,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
         var value = upgrade.Value;
         StatManager.Instance.SetStat(statType, value);
         
-        OnChanged?.Invoke();
         return true;
     }
 }

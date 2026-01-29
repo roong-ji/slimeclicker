@@ -10,6 +10,11 @@ public class UIInitializer : MonoBehaviour
     [SerializeField] private ValueView expRewardView;
     [SerializeField] private LevelView levelView;
     
+    [SerializeField] private UpgradeView manualUpgradeView;
+    [SerializeField] private UpgradeView autoUpgradeView;
+    [SerializeField] private UpgradeView goldUpgradeView;
+    [SerializeField] private UpgradeView expUpgradeView;
+    
     private void Start()
     {
         InitializeAll();
@@ -20,6 +25,7 @@ public class UIInitializer : MonoBehaviour
         var gm = GameManager.Instance;
         var cm = CurrencyManager.Instance;
         var sm = StatManager.Instance;
+        var um = UpgradeManager.Instance;
         if (gm == null)
         {
             Debug.LogError("GameManager를 찾을 수 없습니다!");
@@ -32,5 +38,10 @@ public class UIInitializer : MonoBehaviour
         goldRewardView.Initialize(sm.GetStat(EStatType.GoldReward));
         expRewardView.Initialize(sm.GetStat(EStatType.ExpReward));
         levelView.Initialize(gm.Level);
+        
+        manualUpgradeView.Initialize(um.GetUpgrade(EStatType.ManualDamage), cm);
+        autoUpgradeView.Initialize(um.GetUpgrade(EStatType.AutoDamage), cm);
+        goldUpgradeView.Initialize(um.GetUpgrade(EStatType.GoldReward), cm);
+        expUpgradeView.Initialize(um.GetUpgrade(EStatType.ExpReward), cm);
     }
 }

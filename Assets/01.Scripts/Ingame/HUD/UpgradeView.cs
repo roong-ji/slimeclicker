@@ -1,5 +1,4 @@
 using TMPro;
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,33 +13,38 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     
     [SerializeField] private GameObject _hideButton;
     [SerializeField] private GameObject _upgradeImage;
+
+    private Upgrade _upgrade;
+    private IReadOnlyValue _currency;
     
-    public event Action OnClick;
-    
-    private void Start()
+    public void Initialize(Upgrade upgrade, IReadOnlyValue currency)
     {
-        CurrencyManager.Instance.OnChanged += RefreshButtonUI;
-        RefreshButtonUI(CurrencyManager.Instance.Amount);
-        RefreshCostUI();
+        _upgrade = upgrade;
+        _currency = currency;
+        
+        _upgrade.OnChanged += RefreshCostUI;
+        _currency.OnChanged += RefreshButtonUI;
+        RefreshButtonUI(currency.Amount);
+        RefreshCostUI(upgrade.Cost);
     }
 
     private void OnDestroy()
     {
-        if (CurrencyManager.Instance == null) return;
-        CurrencyManager.Instance.OnChanged -= RefreshButtonUI;
+        _upgrade.OnChanged -= RefreshCostUI;
+        if (_currency == null) return;
+        _currency.OnChanged -= RefreshButtonUI;
     }
     
     private void RefreshButtonUI(double gold)
     {
-        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
+        var cost = _upgrade.Cost;
         var canAfford = gold >= cost;
         _hideButton.SetActive(!canAfford);
         _upgradeImage.SetActive(canAfford);
     }
 
-    private void RefreshCostUI()
+    private void RefreshCostUI(double cost)
     {
-        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
         _costTextUI.SetText(cost.ToUnitString());
         _hideCostTextUI.SetText(cost.ToUnitString());
     }
@@ -48,8 +52,6 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     public void OnPointerClick(PointerEventData eventData)
     {
         UpgradeManager.Instance.TryUpgrade(_targetStatType);
-        RefreshCostUI();
-        OnClick?.Invoke();
     }
     
     public void OnPointerEnter(PointerEventData eventData)
