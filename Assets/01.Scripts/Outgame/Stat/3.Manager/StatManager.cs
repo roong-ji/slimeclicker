@@ -3,20 +3,15 @@ using UnityEngine;
 
 public class StatManager : Singleton<StatManager>
 {
-    [SerializeField] private Stat _manualDamage; 
-    [SerializeField] private Stat _autoDamage;
-    [SerializeField] private Stat _goldReward;
-    [SerializeField] private Stat _expReward;
-    
-    public Stat ManualDamage => _manualDamage;
-    public Stat AutoDamage => _autoDamage;
-    public Stat GoldReward => _goldReward;
-    public Stat ExpReward => _expReward;
-    
-    private Dictionary<EStatType, Stat> _stats = new();
+    private SerializableDictionary<EStatType, Stat> _stats = new();
+    public IReadOnlyDictionary<EStatType, Stat> Stats => _stats;
 
-    protected override void OnInit()
+    public bool TryUpgrade(EStatType statType, double amount)
     {
-        _stats.Add
+        if (!Stats.TryGetValue(statType, out var stat)) return false;
+
+        stat.AddValue(amount);
+        
+        return true;
     }
 }

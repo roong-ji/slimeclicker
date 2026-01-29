@@ -1,5 +1,5 @@
 ﻿public interface IRepository<T>
 {
-    void Save(T currency);
+    void Save(T data);
     T Load();
 }
