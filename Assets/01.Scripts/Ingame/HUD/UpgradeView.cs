@@ -13,15 +13,42 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     [SerializeField] private TextMeshProUGUI _hideCostTextUI;
     
     [SerializeField] private GameObject _hideButton;
+    [SerializeField] private GameObject _upgradeImage;
     
     public event Action OnClick;
+    
+    private void Start()
+    {
+        CurrencyManager.Instance.OnChanged += RefreshButtonUI;
+        RefreshButtonUI(CurrencyManager.Instance.Amount);
+        RefreshCostUI();
+    }
+
+    private void OnDestroy()
+    {
+        if (CurrencyManager.Instance == null) return;
+        CurrencyManager.Instance.OnChanged -= RefreshButtonUI;
+    }
+    
+    private void RefreshButtonUI(double gold)
+    {
+        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
+        var canAfford = gold >= cost;
+        _hideButton.SetActive(!canAfford);
+        _upgradeImage.SetActive(canAfford);
+    }
+
+    private void RefreshCostUI()
+    {
+        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
+        _costTextUI.SetText(cost.ToUnitString());
+        _hideCostTextUI.SetText(cost.ToUnitString());
+    }
     
     public void OnPointerClick(PointerEventData eventData)
     {
         UpgradeManager.Instance.TryUpgrade(_targetStatType);
-        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
-        _costTextUI.SetText(cost.ToUnitString());
-        _hideCostTextUI.SetText(cost.ToUnitString());
+        RefreshCostUI();
         OnClick?.Invoke();
     }
     
@@ -29,22 +56,5 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     {
         Tooltip.Instance.Hide();
     }
-    
-    private void Start()
-    {
-        CurrencyManager.Instance.OnChanged += RefreshUI;
-        RefreshUI(CurrencyManager.Instance.Amount);
-    }
 
-    private void OnDestroy()
-    {
-        if (CurrencyManager.Instance == null) return;
-        CurrencyManager.Instance.OnChanged -= RefreshUI;
-    }
-    
-    private void RefreshUI(double gold)
-    {
-        var cost = UpgradeManager.Instance.GetCost(_targetStatType);
-        _hideButton.SetActive(gold < cost);
-    }
 }
