@@ -1,16 +1,49 @@
-using System;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradePresenter : MonoBehaviour
 {
-    private Dictionary<EStatType, Stat> _stats = new();
+    [Header("Settings")]
+    [SerializeField] private EStatType _targetStatType;
 
-    public void Initialize(ReadOnlySpan<Stat> stats)
+    [Header("UI References")]
+    [SerializeField] private UpgradeButton _upgradeButton;
+    [SerializeField] private TextMeshProUGUI _costTextUI;
+
+    private IReadOnlyValue _stat;
+    
+    private void Start()
     {
-        foreach (var stat in stats)
-        {
-            //_stats.Add(stat.Type, stat);
-        }
+        CurrencyManager.Instance.OnChanged += OnCurrencyChanged;
+        _upgradeButton.OnClick += OnClickUpgrade;
+
+        RefreshUI(CurrencyManager.Instance.Amount);
+    }
+
+    private void OnDestroy()
+    {
+        _upgradeButton.OnClick -= OnClickUpgrade;
+        if (CurrencyManager.Instance == null) return;
+        CurrencyManager.Instance.OnChanged -= OnCurrencyChanged;
+    }
+    
+    private void OnClickUpgrade()
+    {
+        StatManager.Instance.TryUpgrade(_targetStatType);
+    }
+
+    private void OnCurrencyChanged(double gold)
+    {
+        RefreshUI(gold);
+    }
+
+    private void RefreshUI(double gold)
+    {
+        var cost = StatManager.Instance.GetCost(_targetStatType);
+        _costTextUI.SetText(cost.ToUnitString());
+        
+        if(gold >= cost) _upgradeButton.Show();
+        else _upgradeButton.Hide();
     }
 }
