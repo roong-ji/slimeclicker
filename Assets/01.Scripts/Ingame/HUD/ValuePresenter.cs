@@ -16,7 +16,8 @@ public class ValuePresenter : MonoBehaviour
     public void Initialize(IReadOnlyValue value)
     {
         _value = value;
-        _textUI.SetText(value.Amount.ToUnitString());
+        _displayedValue = _value.Amount;
+        _textUI.SetText(_displayedValue.ToUnitString());
         _value.OnChanged += Refresh;
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textUI;
+    [SerializeField] private TooltipDataTableSO _tooltipSO;
     
     public static Tooltip Instance { get; private set; }
 
@@ -14,8 +15,9 @@ public class Tooltip : MonoBehaviour
         transform.localScale = Vector3.one;
     }
 
-    public void Show(string text)
+    public void Show(EStatType statType)
     {
+        var text = _tooltipSO.GetTooltip(statType);
         _textUI.SetText(text);
         gameObject.SetActive(true);
     }
