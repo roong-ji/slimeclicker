@@ -4,9 +4,6 @@ using UnityEngine.EventSystems;
 
 public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
-    [Header("Settings")]
-    [SerializeField] private EStatType _targetStatType;
-
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI _costTextUI;
     [SerializeField] private TextMeshProUGUI _hideCostTextUI;
@@ -51,7 +48,7 @@ public class UpgradeView : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        UpgradeManager.Instance.TryUpgrade(_targetStatType);
+        UpgradeManager.Instance.TryUpgrade(_upgrade.Type);
     }
     
     public void OnPointerEnter(PointerEventData eventData)

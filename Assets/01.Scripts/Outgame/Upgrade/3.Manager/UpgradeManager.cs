@@ -10,7 +10,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     {
         foreach (var data in _dataSO.Datas)
         {
-            var upgrade = new Upgrade(data.Value);
+            var upgrade = new Upgrade(data.Value, data.Key);
             _upgrades.Add(data.Key, upgrade);
         }
     }

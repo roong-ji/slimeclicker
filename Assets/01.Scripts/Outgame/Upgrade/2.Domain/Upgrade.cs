@@ -5,8 +5,9 @@ using UnityEngine;
 public class Upgrade
 {
     private UpgradeData _data;
-
-    public Upgrade(UpgradeData data, int level = 1)
+    public EStatType Type { get; private set; }
+    
+    public Upgrade(UpgradeData data, EStatType type, int level = 1)
     {
         if (data.MaxLevel < 0) throw new ArgumentException($"최대 레벨은 0보다 커야 합니다: {data.MaxLevel}");
         if (data.BaseCost <= 0) throw new ArgumentException($"기본 비용은 0 이상이어야 합니다: {data.BaseCost}");
@@ -15,6 +16,7 @@ public class Upgrade
         if (data.ValueMultiplier < 0) throw new ArgumentException($"비용 증가량은 0보다 커야 합니다: {data.ValueMultiplier}");
 
         _data = data;
+        Type = type;
         Level = level;
     }
     
