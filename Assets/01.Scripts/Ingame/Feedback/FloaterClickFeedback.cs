@@ -13,7 +13,7 @@ public class FloaterClickFeedback : MonoBehaviour, IClickFeedback, IDespawnFeedb
 
     public void OnDespawn()
     {
-        var gold = StatManager.Instance.GetStat(EStatType.GoldReward).Amount;
+        var gold = StatManager.Instance.GetStat(EStatType.GoldReward).FinalStat;
         FloaterSpawner.Instance.ShowGold(gold, transform.position);
     }
 }

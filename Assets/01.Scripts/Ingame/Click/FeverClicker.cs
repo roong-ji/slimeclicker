@@ -9,7 +9,7 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
     private static WaitForSeconds _wait;
 
     private Fever _fever;
-    private IReadOnlyValue _damage;
+    private IReadOnlyStat _damage;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
 
     private void AttackAllSlimes()
     {
-        ClickInfo feverInfo = new(EClickType.Fever, _damage.Amount);
+        ClickInfo feverInfo = new(EClickType.Fever, _damage.FinalStat);
 
         var targets = GameManager.Instance.Slimes;
 

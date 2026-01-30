@@ -26,14 +26,14 @@ public class GameManager : Singleton<GameManager>
 
     public void GetReward()
     {
-        CurrencyManager.Instance.Add(StatManager.Instance.GetStat(EStatType.GoldReward).Amount);
-        Level.AddExp(StatManager.Instance.GetStat(EStatType.ExpReward).Amount);
+        CurrencyManager.Instance.Add(StatManager.Instance.GetStat(EStatType.GoldReward).FinalStat);
+        Level.AddExp(StatManager.Instance.GetStat(EStatType.ExpReward).FinalStat);
     }
 
     private void LevelUp(int level)
     {
-        //ManualDamage.MulValue(DamageFactor);
-        //AutoDamage.MulValue(DamageFactor);
+        StatManager.Instance.SetStatRate(EStatType.ManualDamage, 1 + level * DamageFactor);
+        StatManager.Instance.SetStatRate(EStatType.AutoDamage, 1 + level * DamageFactor);
     }
     
     public void RegisterSlime(Slime slime)

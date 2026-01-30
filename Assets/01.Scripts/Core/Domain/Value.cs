@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Value : IReadOnlyValue
 {
-    [SerializeField] private double _amount;
+    [SerializeField] protected double _amount;
     public double Amount => _amount;
     
     public event Action<double> OnChanged;
