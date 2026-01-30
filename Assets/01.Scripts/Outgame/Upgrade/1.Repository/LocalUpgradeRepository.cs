@@ -2,49 +2,20 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalUpgradeRepository : IRepository<Dictionary<EStatType, Upgrade>>
+public class LocalUpgradeRepository : IRepository<UpgradeSaveData>
 {
-    private UpgradeDataTableSO _dataSO;
-
     private readonly string _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
     private const string SaveFileName = "Upgrade.dat";
     
-    public LocalUpgradeRepository(UpgradeDataTableSO dataSO)
+    public void Save(UpgradeSaveData data)
     {
-        _dataSO = dataSO;
-    }
-    
-    public void Save(Dictionary<EStatType, Upgrade> data)
-    {
-        var saveData = new UpgradeSaveData();
-        foreach (var item in data)
-        {
-            var saveItem = new UpgradeInfo(item.Key, item.Value.Level);
-            saveData.Add(saveItem);
-        }
-        FileIO.Save(saveData, _saveFilePath);
+        FileIO.Save(data, _saveFilePath);
     }
 
-    public Dictionary<EStatType, Upgrade> Load()
+    public UpgradeSaveData Load()
     {
-        var data = new Dictionary<EStatType, Upgrade>();
-        var saveData = new UpgradeSaveData();
-        FileIO.Load(saveData, _saveFilePath);
-
-        foreach (var item in saveData.SaveData)
-        {
-            var info = _dataSO.GetData(item.Type);
-            var upgrade = new Upgrade(info, item.Type, item.Level);
-            data.Add(item.Type, upgrade);
-        }
-        
-        foreach (var info in _dataSO.Datas)
-        {
-            if (data.ContainsKey(info.Key)) continue;
-            var upgrade = new Upgrade(info.Value, info.Key);
-            data.Add(info.Key, upgrade);
-        }
-        
+        var data = new UpgradeSaveData();
+        FileIO.Load(data, _saveFilePath);
         return data;
     }
 }
@@ -60,8 +31,9 @@ public class UpgradeSaveData
         _saveData = saveData ?? new ();
     }
 
-    public void Add(UpgradeInfo info)
+    public void Add(EStatType type, int level)
     {
+        var info = new UpgradeInfo(type, level);
         _saveData.Add(info);
     }
 }

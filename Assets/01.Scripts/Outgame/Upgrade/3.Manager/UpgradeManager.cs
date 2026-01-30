@@ -4,14 +4,16 @@ using UnityEngine;
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     [SerializeField] private UpgradeDataTableSO _dataSO;
-    private Dictionary<EStatType, Upgrade> _upgrades;
+    private readonly Dictionary<EStatType, Upgrade> _upgrades = new();
 
-    private IRepository<Dictionary<EStatType, Upgrade>> _repository;
+    private IRepository<UpgradeSaveData> _repository;
     
     protected override void OnInit()
     {
-        _repository = new LocalUpgradeRepository(_dataSO);
-        _upgrades = _repository.Load();
+        _repository = new LocalUpgradeRepository();
+        var saveData = _repository.Load();
+        InitSaveData(saveData);
+        SetUpgradeStat();
     }
 
     public Upgrade GetUpgrade(EStatType statType)
@@ -34,8 +36,38 @@ public class UpgradeManager : Singleton<UpgradeManager>
         return true;
     }
 
+    private void InitSaveData(UpgradeSaveData saveData)
+    {
+        foreach (var info in saveData.SaveData)
+        {
+            var data = _dataSO.GetData(info.Type);
+            var upgrade = new Upgrade(data, info.Type, info.Level);
+            _upgrades.Add(info.Type, upgrade);
+        }
+
+        foreach (var info in _dataSO.Datas)
+        {
+            if (_upgrades.ContainsKey(info.Key)) continue;
+            var upgrade = new Upgrade(info.Value, info.Key);
+            _upgrades.Add(info.Key, upgrade);
+        }
+    }
+
+    private void SetUpgradeStat()
+    {
+        foreach (var upgrade in _upgrades)
+        {
+            StatManager.Instance.SetStat(upgrade.Key, upgrade.Value.Value);
+        }
+    }
+
     private void OnApplicationQuit()
     {
-        _repository.Save(_upgrades);
+        var data = new UpgradeSaveData();
+        foreach (var upgrade in _upgrades)
+        {
+            data.Add(upgrade.Key, upgrade.Value.Level);
+        }
+        _repository.Save(data);
     }
 }
