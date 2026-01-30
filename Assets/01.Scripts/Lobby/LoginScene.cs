@@ -14,17 +14,21 @@ public class LoginScene : MonoBehaviour
 
     private SceneMode _mode = SceneMode.Login;
 
-    [SerializeField] private GameObject _passwordConfirmObject;
-
+    [Header("버튼 연결")]
     [SerializeField] private Button _gotoRegisterButton;
     [SerializeField] private Button _loginButton;
     [SerializeField] private Button _gotoLoginButton;
     [SerializeField] private Button _registerButton;
+    [SerializeField] private Toggle _remeberID;
 
+    [Header("입력 창 연결")]
     [SerializeField] private TMP_InputField _idInputField;
     [SerializeField] private TMP_InputField _passwordInputField;
     [SerializeField] private TMP_InputField _passwordConfirmInputField;
+    [SerializeField] private GameObject _passwordConfirmObject;
 
+    [Header("텍스트 연결")]
+    [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private TextMeshProUGUI _messageTextUI;
 
     private const string LastLoggedInID = "LastLoggedInID";
@@ -116,11 +120,12 @@ public class LoginScene : MonoBehaviour
             return;
         }
 
-        PlayerPrefs.SetString(LastLoggedInID, id);
-
+        if (_remeberID.isOn) PlayerPrefs.SetString(LastLoggedInID, id);
+        else PlayerPrefs.DeleteKey(LastLoggedInID);
+        
         _messageTextUI.text = "* 로그인 성공";
 
-        SceneManager.LoadScene("LoadingScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     private void Register()
@@ -182,12 +187,14 @@ public class LoginScene : MonoBehaviour
     private void GotoLogin()
     {
         _mode = SceneMode.Login;
+        _titleText.SetText("로그인");
         Refresh();
     }
 
     private void GotoRegister()
     {
         _mode = SceneMode.Register;
+        _titleText.SetText("회원 가입");
         Refresh();
     }
 
