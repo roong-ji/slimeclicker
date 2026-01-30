@@ -67,121 +67,40 @@ public class LoginScene : MonoBehaviour
 
     private void Login()
     {
-        string id = _idInputField.text;
-        if (string.IsNullOrEmpty(id))
+        var email = _idInputField.text;
+        var password = _passwordInputField.text;
+
+        if (AccountManager.Instance.TryLogin(email, password))
         {
-            _messageTextUI.text = "아이디를 입력해주세요";
-            return;
+            _messageTextUI.SetText("* 로그인 성공");
+            SceneManager.LoadScene("GameScene");
         }
-
-        if (!Reg.IsEmailType(id))
+        else
         {
-            _messageTextUI.text = "아이디는 이메일 형식이어야 합니다.";
-            return;
+            _messageTextUI.SetText("로그인에 실패했습니다.");
         }
-
-        string password = _passwordInputField.text;
-        if (string.IsNullOrEmpty(password))
-        {
-            _messageTextUI.text = "패스워드를 입력해주세요.";
-            return;
-        }
-
-        string idHash = Hash.GetHash(id);
-        if (!PlayerPrefs.HasKey(idHash))
-        {
-            _messageTextUI.text = "아이디를 확인해주세요.";
-            return;
-        }
-
-        string passwordDB = PlayerPrefs.GetString(idHash);
-        string passwordHash = Hash.GetHash(password);
-        string passwordDecrypted = string.Empty;
-
-        try
-        {
-            passwordDecrypted = AES.Decrypt(passwordDB, SecurityKey);
-#if UNITY_EDITOR
-            Debug.Log($"<color=cyan>[복호화됨]</color> {passwordDecrypted}");
-#endif
-        }
-        catch (Exception)
-        {
-            _messageTextUI.text = "데이터 오류: 로그인 정보를 확인할 수 없습니다.";
-            return;
-        }
-
-        if (passwordHash != passwordDecrypted)
-        {
-            _messageTextUI.text = "패스워드를 확인해주세요";
-#if UNITY_EDITOR
-            Debug.Log($"<color=red>[틀린 비번 시도]</color> 결과: {passwordDecrypted}");
-#endif
-            return;
-        }
-
-        if (_remeberID.isOn) PlayerPrefs.SetString(LastLoggedInID, id);
-        else PlayerPrefs.DeleteKey(LastLoggedInID);
-        
-        _messageTextUI.text = "* 로그인 성공";
-
-        SceneManager.LoadScene("GameScene");
     }
 
     private void Register()
     {
-        string id = _idInputField.text;
-        if (string.IsNullOrEmpty(id))
-        {
-            _messageTextUI.text = "아이디를 입력해주세요";
-            return;
-        }
+        var email = _idInputField.text;
+        var password = _passwordInputField.text;
+        var passwordConfirm = _passwordConfirmInputField.text;
 
-        if (!Reg.IsEmailType(id))
-        {
-            _messageTextUI.text = "아이디는 이메일 형식이어야 합니다.";
-            return;
-        }
-
-        string password = _passwordInputField.text;
-        if (string.IsNullOrEmpty(password))
-        {
-            _messageTextUI.text = "패스워드를 입력해주세요";
-            return;
-        }
-
-        if (!Reg.IsValidPassword(password))
-        {
-            SetPasswordErrorMessage(password);
-            return;
-        }
-
-        string passwordConfirm = _passwordConfirmInputField.text;
         if (string.IsNullOrEmpty(passwordConfirm) || password != passwordConfirm)
         {
-            _messageTextUI.text = "패스워드를 확인해주세요";
-            return;
+            _messageTextUI.SetText("패스워드를 확인해주세요.");
         }
 
-        string idHash = Hash.GetHash(id);
-        if (PlayerPrefs.HasKey(idHash))
+        if (AccountManager.Instance.TryRegister(email, password))
         {
-            _messageTextUI.text = "중복된 아이디입니다.";
-            return;
+            _messageTextUI.SetText("* 아이디가 생성되었습니다.");
+            GotoLogin();
         }
-
-        string passwordHash = Hash.GetHash(password);
-        string encryptedPassword = AES.Encrypt(passwordHash, SecurityKey);
-        PlayerPrefs.SetString(idHash, encryptedPassword);
-
-#if UNITY_EDITOR
-        Debug.Log($"<color=green>[원본]</color> {password}");
-        Debug.Log($"<color=yellow>[암호화됨]</color> {encryptedPassword}");
-#endif
-
-        GotoLogin();
-
-        _messageTextUI.text = "* 아이디가 생성되었습니다.";
+        else
+        {
+            _messageTextUI.SetText("회원 가입에 실패했습니다.");
+        }
     }
 
     private void GotoLogin()
