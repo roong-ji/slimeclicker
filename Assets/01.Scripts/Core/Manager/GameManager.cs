@@ -26,8 +26,8 @@ public class GameManager : Singleton<GameManager>
 
     public void GetReward()
     {
-        CurrencyManager.Instance.Add(StatManager.Instance.GetStat(EStatType.GoldReward).FinalStat);
-        Level.AddExp(StatManager.Instance.GetStat(EStatType.ExpReward).FinalStat);
+        CurrencyManager.Instance.Add(StatManager.Instance.GetStat(EStatType.GoldReward).Amount);
+        Level.AddExp(StatManager.Instance.GetStat(EStatType.ExpReward).Amount);
     }
 
     private void LevelUp(int level)

@@ -4,7 +4,7 @@ public class StatManager : Singleton<StatManager>
 {
     [SerializeField] private SerializableDictionary<EStatType, Stat> _stats;
     
-    public IReadOnlyStat GetStat(EStatType statType)
+    public IReadOnlyValue GetStat(EStatType statType)
     {
         return _stats.GetValueOrDefault(statType);
     }
@@ -12,7 +12,7 @@ public class StatManager : Singleton<StatManager>
     public void SetStat(EStatType statType, double value)
     {
         var stat = _stats.GetValueOrDefault(statType);
-        stat.SetValue(value);
+        stat.SetBaseValue(value);
     }
 
     public void SetStatRate(EStatType statType, float rate)
