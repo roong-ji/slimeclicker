@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class AutoClicker : MonoBehaviour
 {
-    private Value _damage;
+    private IReadOnlyValue _damage;
     [SerializeField] private float _speed;
     private float _timer;
     
     private void Start()
     {
         _timer = 0;
-        _damage = GameManager.Instance.AutoDamage;
+        _damage = StatManager.Instance.GetStat(EStatType.AutoDamage);
     }
     
     private void Update()

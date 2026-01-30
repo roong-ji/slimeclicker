@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f3a45ea516f6b4f866daf167bdbfea, type: 3}
+  m_Name: TooltipDataTableSO
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipDataTableSO
+  _statDict:
+    _pairs:
+    - Key: 0
+      Value: "\uD074\uB9AD \uACF5\uACA9\uC758 \uB370\uBBF8\uC9C0"
+    - Key: 1
+      Value: "\uC790\uB3D9\uC73C\uB85C \uBC1C\uB3D9\uB418\uB294 \uACF5\uACA9\uC758
+        \uB370\uBBF8\uC9C0"
+    - Key: 2
+      Value: "\uC2AC\uB77C\uC784 \uCC98\uCE58 \uC2DC \uACE8\uB4DC \uD68D\uB4DD\uB7C9"
+    - Key: 3
+      Value: "\uC2AC\uB77C\uC784 \uCC98\uCE58 \uC2DC \uACBD\uD5D8\uCE58 \uD68D\uB4DD\uB7C9"

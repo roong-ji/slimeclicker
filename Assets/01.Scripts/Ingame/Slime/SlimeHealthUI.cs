@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class SlimeHealthUI : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    private Value _healthReference;
+    private Stat _healthReference;
     private double _maxHp;
 
     // 슬라임이 초기화될 때 호출해줄 함수
-    public void Setup(Value health)
+    public void Setup(Stat health)
     {
         _healthReference = health;
         _maxHp = health.Amount;

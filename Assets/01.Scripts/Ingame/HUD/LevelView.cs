@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelPresenter : MonoBehaviour
+public class LevelView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _levelTextUI;
     [SerializeField] private TextMeshProUGUI _expTextUI;

@@ -7,13 +7,13 @@ public class GameData
     public Level Level;
     public Stage Stage;
     
-    public Value ManualDamage; 
-    public Value AutoDamage;
+    public Stat ManualDamage; 
+    public Stat AutoDamage;
     
-    public Value GoldReward;
-    public Value ExpReward;
+    public Stat GoldReward;
+    public Stat ExpReward;
 
-    public Value Gold;
+    public Stat Gold;
     
     public string GetSummary()
     {

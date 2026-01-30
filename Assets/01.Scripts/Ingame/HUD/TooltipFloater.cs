@@ -3,11 +3,11 @@ using UnityEngine.EventSystems;
 
 public class TooltipFloater : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string _text;
+    [SerializeField] private EStatType _type;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Tooltip.Instance.Show(_text);
+        Tooltip.Instance.Show(_type);
     }
 
     public void OnPointerExit(PointerEventData eventData)

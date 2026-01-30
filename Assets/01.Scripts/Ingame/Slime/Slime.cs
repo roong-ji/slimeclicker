@@ -5,7 +5,7 @@ public class Slime : MonoBehaviour, IClickable
 {
     [Header("설정")]
     [SerializeField] private int _baseHealth;
-    [SerializeField] private Value _health;
+    [SerializeField] private Stat _health;
     [SerializeField] private SlimeHealthUI _healthUI;
     
     private const float DeathTime = 0.5f;

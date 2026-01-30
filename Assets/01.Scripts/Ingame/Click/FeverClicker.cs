@@ -9,12 +9,12 @@ public class FeverClicker : MonoBehaviour, IPointerClickHandler
     private static WaitForSeconds _wait;
 
     private Fever _fever;
-    private Value _damage;
+    private IReadOnlyValue _damage;
 
     private void Start()
     {
         _wait = new(_feverDuration);
-        _damage = GameManager.Instance.ManualDamage;
+        _damage = StatManager.Instance.GetStat(EStatType.ManualDamage);
         _fever = GameManager.Instance.Fever;
         _fever.OnFeverStarted += StartFeverRoutine;
         gameObject.SetActive(false);
