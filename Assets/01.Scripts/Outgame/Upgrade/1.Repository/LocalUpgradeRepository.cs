@@ -6,13 +6,12 @@ public class LocalUpgradeRepository : IRepository<Dictionary<EStatType, Upgrade>
 {
     private UpgradeDataTableSO _dataSO;
 
-    private readonly string _saveFilePath;
+    private readonly string _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
     private const string SaveFileName = "Upgrade.dat";
     
     public LocalUpgradeRepository(UpgradeDataTableSO dataSO)
     {
         _dataSO = dataSO;
-        _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
     }
     
     public void Save(Dictionary<EStatType, Upgrade> data)
@@ -38,6 +37,14 @@ public class LocalUpgradeRepository : IRepository<Dictionary<EStatType, Upgrade>
             var upgrade = new Upgrade(info, item.Type, item.Level);
             data.Add(item.Type, upgrade);
         }
+        
+        foreach (var info in _dataSO.Datas)
+        {
+            if (data.ContainsKey(info.Key)) continue;
+            var upgrade = new Upgrade(info.Value, info.Key);
+            data.Add(info.Key, upgrade);
+        }
+        
         return data;
     }
 }

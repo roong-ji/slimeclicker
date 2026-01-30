@@ -3,13 +3,8 @@ using System.IO;
 
 public class LocalCurrencyRepository : IRepository<Currency>
 {
-    private readonly string _saveFilePath;
+    private readonly string _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
     private const string SaveFileName = "Save.dat";
-    
-    public LocalCurrencyRepository()
-    {
-        _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
-    }
     
     public void Save(Currency currency)
     {

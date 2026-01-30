@@ -6,12 +6,13 @@ public class CurrencyManager : Singleton<CurrencyManager>, IReadOnlyValue
     private Currency _gold;
     public double Amount => _gold.Value;
 
-    private readonly IRepository<Currency> _repository = new LocalCurrencyRepository();
+    private IRepository<Currency> _repository;
     
     public event Action<double> OnChanged;
     
     protected override void OnInit()
     {
+        _repository = new LocalCurrencyRepository();
         _gold = _repository.Load();
     }
 
