@@ -4,11 +4,11 @@ using UnityEngine;
 [Serializable]
 public class Stat : Value
 {
-    [SerializeField] private int _level = 1;
-    public int Level => _level;
+    [SerializeField] private float _rate;
+    public float Rate => _rate;
 
-    public void LevelUp()
+    public void SetRate(float rate)
     {
-        _level++;
+        _rate = rate;
     }
 }
