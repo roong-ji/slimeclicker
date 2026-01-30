@@ -4,36 +4,33 @@ using System;
 
 public static class FileIO
 {
-    private static readonly string s_saveFilePath;
-    private static readonly string s_saveFileName = "Save.dat";
     private static readonly string s_securityKey = "SecretKeyForSave";
     private static readonly byte[] s_hashedKey;
 
     static FileIO()
     {
-        s_saveFilePath = Path.Combine(Application.persistentDataPath, s_saveFileName);
         s_hashedKey = AES.GetHashedKey(s_securityKey);
     }
 
-    public static void Save<T>(T data)
+    public static void Save<T>(T data, string filePath)
     {
         string json = JsonUtility.ToJson(data);
 
-        using var fileStream = new FileStream(s_saveFilePath, FileMode.Create);
+        using var fileStream = new FileStream(filePath, FileMode.Create);
         AES.Encrypt(fileStream, json, s_hashedKey);
         
 #if UNITY_EDITOR
         Debug.Log($"<color=yellow>[암호화됨]</color> {json}");
-        Debug.Log($"<color=green>[데이터 저장 성공]</color> {s_saveFilePath}");
+        Debug.Log($"<color=green>[데이터 저장 성공]</color> {filePath}");
 #endif
     }
 
-    public static bool Load<T>(T data)
+    public static bool Load<T>(T data, string filePath)
     {
-        if (!File.Exists(s_saveFilePath)) return false;
+        if (!File.Exists(filePath)) return false;
 
-        using var fileStream = new FileStream(s_saveFilePath, FileMode.Open);
-        string json = string.Empty;
+        using var fileStream = new FileStream(filePath, FileMode.Open);
+        var json = string.Empty;
 
         try
         {
@@ -55,6 +52,4 @@ public static class FileIO
 
         return true;
     }
-
-    public static bool Exists => File.Exists(s_saveFilePath);
 }

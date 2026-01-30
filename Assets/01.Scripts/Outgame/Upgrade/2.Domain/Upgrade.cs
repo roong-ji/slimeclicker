@@ -17,10 +17,11 @@ public class Upgrade
 
         _data = data;
         Type = type;
-        Level = level;
+        _level = level;
     }
-    
-    public int Level { get; private set; }
+
+    [SerializeField] private int _level;
+    public int Level => _level;
     public double Cost => _data.BaseCost * Math.Pow(_data.CostMultiplier, Level - 1);
     public double Value => _data.BaseValue * Math.Pow(_data.ValueMultiplier, Level - 1);
     public bool IsMaxLevel => Level >= _data.MaxLevel;
@@ -30,7 +31,7 @@ public class Upgrade
     public bool TryLevelUp()
     {
         if (IsMaxLevel) return false;
-        Level++;
+        _level++;
         OnChanged?.Invoke(Cost);
         return true;
     }

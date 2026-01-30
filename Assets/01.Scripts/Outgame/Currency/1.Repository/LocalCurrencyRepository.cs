@@ -1,29 +1,38 @@
 using UnityEngine;
+using System.IO;
 
 public class LocalCurrencyRepository : IRepository<Currency>
 {
+    private readonly string _saveFilePath;
+    private const string SaveFileName = "Save.dat";
+    
+    public LocalCurrencyRepository()
+    {
+        _saveFilePath = Path.Combine(Application.persistentDataPath, SaveFileName);
+    }
+    
     public void Save(Currency currency)
     {
-        CurrencyData data = new(currency);
-        FileIO.Save(data);
+        var saveData = new CurrencySaveData(currency);
+        FileIO.Save(saveData, _saveFilePath);
     }
 
     public Currency Load()
     {
-        CurrencyData data = new();
-        FileIO.Load(data);
+        var saveData = new CurrencySaveData();
+        FileIO.Load(saveData, _saveFilePath);
 
-        return data.Currency;
+        return saveData.Currency;
     }
 }
 
 [System.Serializable]
-public class CurrencyData
+public class CurrencySaveData
 {
     [SerializeField] private Currency _currency;
     public Currency Currency => _currency;
 
-    public CurrencyData(Currency currency = default)
+    public CurrencySaveData(Currency currency = default)
     {
         _currency = currency;
     }

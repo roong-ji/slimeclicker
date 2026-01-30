@@ -4,15 +4,14 @@ using UnityEngine;
 public class UpgradeManager : Singleton<UpgradeManager>
 {
     [SerializeField] private UpgradeDataTableSO _dataSO;
-    private readonly Dictionary<EStatType, Upgrade> _upgrades = new();
+    private Dictionary<EStatType, Upgrade> _upgrades;
+
+    private IRepository<Dictionary<EStatType, Upgrade>> _repository;
     
     protected override void OnInit()
     {
-        foreach (var data in _dataSO.Datas)
-        {
-            var upgrade = new Upgrade(data.Value, data.Key);
-            _upgrades.Add(data.Key, upgrade);
-        }
+        _repository = new LocalUpgradeRepository(_dataSO);
+        _upgrades = _repository.Load();
     }
 
     public Upgrade GetUpgrade(EStatType statType)
@@ -33,5 +32,10 @@ public class UpgradeManager : Singleton<UpgradeManager>
         StatManager.Instance.SetStat(statType, value);
         
         return true;
+    }
+
+    private void OnApplicationQuit()
+    {
+        _repository.Save(_upgrades);
     }
 }
