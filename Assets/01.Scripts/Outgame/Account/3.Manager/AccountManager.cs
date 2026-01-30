@@ -9,7 +9,7 @@ public class AccountManager : Singleton<AccountManager>
     public bool IsLogin => _account != null;
     public string Email => _account.Email ?? string.Empty;
     
-    public bool TryLogin(string email, string password)
+    public AuthResult TryLogin(string email, string password)
     {
         Account account;
         try
@@ -18,13 +18,21 @@ public class AccountManager : Singleton<AccountManager>
         }
         catch (Exception ex)
         {
-            return false;
+            return new AuthResult
+            (
+                success: false,
+                message: ex.Message
+            );
         }
         
         var emailHash = Hash.GetHash(email);
         if (!PlayerPrefs.HasKey(emailHash))
         {
-            return false;
+            return new AuthResult
+            (
+                success: false,
+                message: "아이디가 존재하지 않습니다."
+            );
         }
         
         var passwordHash = PlayerPrefs.GetString(emailHash);
@@ -34,30 +42,44 @@ public class AccountManager : Singleton<AccountManager>
         {
             passwordDecrypted = AES.Decrypt(passwordHash, SecurityKey);
         }
-        catch (Exception ex)
+        catch
         {
-            //_messageTextUI.text = "데이터 오류: 로그인 정보를 확인할 수 없습니다.";
-            return false;
+             return new AuthResult
+             (
+                 success: false,
+                 message: "데이터 오류: 로그인 정보를 확인할 수 없습니다."
+             );
         }
 
         var inputPassword = Hash.GetHash(account.Password);
         if (inputPassword != passwordDecrypted)
         {
-            //_messageTextUI.text = "패스워드를 확인해주세요";
-            return false;
+            return new AuthResult
+            (
+                success: false,
+                message: "패스워드가 일치하지 않습니다."
+            );
         }
         
         _account = account;
-        return true;
+        return new AuthResult
+        (
+            success: true,
+            message: "* 로그인 성공",
+            account: _account
+        );
     }
 
-    public bool TryRegister(string email, string password)
+    public AuthResult TryRegister(string email, string password)
     {
         var emailHash = Hash.GetHash(email);
         if (PlayerPrefs.HasKey(emailHash))
         {
-            //_messageTextUI.text = "중복된 아이디입니다.";
-            return false;
+            return new AuthResult
+            (
+                success: false,
+                message: "이미 존재하는 아이디입니다."
+            );
         }
         
         try
@@ -66,13 +88,21 @@ public class AccountManager : Singleton<AccountManager>
         }
         catch (Exception ex)
         {
-            return false;
+            return new AuthResult
+            (
+                success: false,
+                message: ex.Message
+            );
         }
  
         var passwordHash = Hash.GetHash(password);
         var encryptedPassword = AES.Encrypt(passwordHash, SecurityKey);
         PlayerPrefs.SetString(emailHash, encryptedPassword);
-        return true;
+        return new AuthResult
+        (
+            success: true,
+            message: "* 아이디가 생성되었습니다."
+        );
     }
 
     public void Logout()

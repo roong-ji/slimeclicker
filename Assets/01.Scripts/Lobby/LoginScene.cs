@@ -32,7 +32,6 @@ public class LoginScene : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _messageTextUI;
 
     private const string LastLoggedInID = "LastLoggedInID";
-    private const string SecurityKey = "SecretKeyForSave";
 
     private void Start()
     {
@@ -70,15 +69,15 @@ public class LoginScene : MonoBehaviour
         var email = _idInputField.text;
         var password = _passwordInputField.text;
 
-        if (AccountManager.Instance.TryLogin(email, password))
-        {
-            _messageTextUI.SetText("* 로그인 성공");
-            SceneManager.LoadScene("GameScene");
-        }
-        else
-        {
-            _messageTextUI.SetText("로그인에 실패했습니다.");
-        }
+        var result = AccountManager.Instance.TryLogin(email, password);
+        _messageTextUI.SetText(result.Message);
+
+        if (!result.Success) return;
+
+        if (_remeberID.isOn) PlayerPrefs.SetString(LastLoggedInID, email);
+        else PlayerPrefs.DeleteKey(LastLoggedInID);
+        
+        SceneManager.LoadScene("GameScene");
     }
 
     private void Register()
@@ -90,17 +89,14 @@ public class LoginScene : MonoBehaviour
         if (string.IsNullOrEmpty(passwordConfirm) || password != passwordConfirm)
         {
             _messageTextUI.SetText("패스워드를 확인해주세요.");
+            return;
         }
 
-        if (AccountManager.Instance.TryRegister(email, password))
-        {
-            _messageTextUI.SetText("* 아이디가 생성되었습니다.");
-            GotoLogin();
-        }
-        else
-        {
-            _messageTextUI.SetText("회원 가입에 실패했습니다.");
-        }
+        var result = AccountManager.Instance.TryRegister(email, password);
+        _messageTextUI.SetText(result.Message);
+        
+        if (!result.Success) return;
+        GotoLogin();
     }
 
     private void GotoLogin()
@@ -115,32 +111,5 @@ public class LoginScene : MonoBehaviour
         _mode = SceneMode.Register;
         _titleText.SetText("회원 가입");
         Refresh();
-    }
-
-    private void SetPasswordErrorMessage(string password)
-    {
-        if (!Reg.IsAllowedChars(password))
-        {
-            _messageTextUI.text = "패스워드는 영어/숫자/특수문자만 가능합니다.";
-            return;
-        }
-
-        if (!Reg.IsAllowedLength(password))
-        {
-            _messageTextUI.text = $"패스워드는 {Reg.MinLength}자리 이상 {Reg.MaxLength}자리 이하여야 합니다.";
-            return;
-        }
-
-        if (!Reg.HasSpecialChar(password))
-        {
-            _messageTextUI.text = "패스워드는 특수문자를 하나 이상 포함해야 합니다.";
-            return;
-        }
-
-        if (!Reg.HasUpperAndLower(password))
-        {
-            _messageTextUI.text = "패스워드는 대소문자를 각 하나 이상 포함해야 합니다.";
-            return;
-        }
     }
 }
