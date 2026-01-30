@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private GameObject _popupLogin;
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene("GameScene");
+        _popupLogin.SetActive(true);
+    }
+
+    public void ClosePopupLogin()
+    {
+        _popupLogin.SetActive(false);
     }
 }

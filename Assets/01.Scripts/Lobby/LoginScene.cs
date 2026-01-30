@@ -14,7 +14,7 @@ public class LoginScene : MonoBehaviour
 
     private SceneMode _mode = SceneMode.Login;
 
-    [SerializeField] private GameObject _passwordCofirmObject;
+    [SerializeField] private GameObject _passwordConfirmObject;
 
     [SerializeField] private Button _gotoRegisterButton;
     [SerializeField] private Button _loginButton;
@@ -47,7 +47,7 @@ public class LoginScene : MonoBehaviour
 
     private void Refresh()
     {
-        _passwordCofirmObject.SetActive(_mode == SceneMode.Register);
+        _passwordConfirmObject.SetActive(_mode == SceneMode.Register);
         _gotoRegisterButton.gameObject.SetActive(_mode == SceneMode.Login);
         _loginButton.gameObject.SetActive(_mode == SceneMode.Login);
         _gotoLoginButton.gameObject.SetActive(_mode == SceneMode.Register);
