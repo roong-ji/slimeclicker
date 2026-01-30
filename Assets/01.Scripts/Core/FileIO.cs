@@ -33,6 +33,7 @@ public static class FileIO
         }
         catch (Exception exception)
         {
+            Debug.LogError(exception.Message);
             return false;
         }
 
