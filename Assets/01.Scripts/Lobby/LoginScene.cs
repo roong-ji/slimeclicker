@@ -99,6 +99,14 @@ public class LoginScene : MonoBehaviour
         GotoLogin();
     }
 
+    public void OnEmailTextChanged(string email)
+    {
+        var emailSpec = new AccountEmailSpecification();
+        
+        _loginButton.interactable = emailSpec.IsSatisfiedBy(email);
+        _messageTextUI.SetText(emailSpec.ErrorMessage);
+    }
+    
     private void GotoLogin()
     {
         _mode = SceneMode.Login;
